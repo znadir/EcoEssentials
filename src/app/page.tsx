@@ -1,5 +1,6 @@
-import { Box, Button, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Image from "next/image";
+import ArticleCard from "./components/articlecard";
 
 export default function Home() {
 	return (
@@ -25,8 +26,15 @@ export default function Home() {
 					/>
 				</Box>
 
-				<h1>Home</h1>
-				<Button variant='text'>Text</Button>
+				<h2>New Eco-friendly Products</h2>
+				<Box>
+					<ArticleCard
+						title='Ecozone Rinse Aid, Natural Rinsing Aid for Dishwashers, Dry & Shine'
+						imagePath='/articles/1.png'
+						rating={4.5}
+						priceCad={7.99}
+					/>
+				</Box>
 			</Container>
 		</main>
 	);

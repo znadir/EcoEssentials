@@ -7,12 +7,12 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 export default function Footer() {
 	return (
-		<Box sx={{ bgcolor: "#e8e8e8" }}>
+		<Box sx={{ bgcolor: "#e8e8e8", mt: 2 }}>
 			<Container
 				maxWidth='xl'
 				sx={{
 					display: "flex",
-					p: 2,
+					py: 3,
 					justifyContent: "space-between",
 					"& a": { display: "block", mb: 1 },
 				}}
