@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
+import { Box } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,15 +23,19 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={inter.className}>
-				<header>
-					<NavBar />
-				</header>
+				<Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+					<nav>
+						<NavBar />
+					</nav>
 
-				<AppRouterCacheProvider options={{ key: "css" }}>
-					<ThemeProvider theme={theme}>{children}</ThemeProvider>
-				</AppRouterCacheProvider>
+					<AppRouterCacheProvider options={{ key: "css" }}>
+						<ThemeProvider theme={theme}>{children}</ThemeProvider>
+					</AppRouterCacheProvider>
 
-				<Footer />
+					<Box sx={{ flex: 1 }} />
+
+					<Footer />
+				</Box>
 			</body>
 		</html>
 	);
