@@ -40,16 +40,17 @@ export default function RootLayout({
 							<Toolbar>
 								<Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
 									<Box sx={{ display: "flex", flex: 1 }}>
-										<Image src='/logo.svg' alt='Eco Essentials' width={221} height={54.51} />
+										<Image src='/logo.svg' alt='Eco Essentials' width={179} height={44.15} />
 
 										<Paper
 											component='form'
 											sx={{
-												p: "2px 4px",
+												p: "0px 4px",
 												display: "flex",
 												alignItems: "center",
 												width: "100%",
 												mx: 3,
+												borderRadius: 2,
 											}}
 										>
 											<InputBase sx={{ ml: 1, flex: 1 }} placeholder='Search Eco Essentials' />
@@ -60,12 +61,7 @@ export default function RootLayout({
 									</Box>
 
 									<Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-										<Button
-											variant='contained'
-											size='medium'
-											color='success'
-											startIcon={<AccountCircleIcon />}
-										>
+										<Button variant='contained' size='medium' startIcon={<AccountCircleIcon />}>
 											Account
 										</Button>
 										<Button
