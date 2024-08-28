@@ -27,13 +27,61 @@ export default function Home() {
 				</Box>
 
 				<h2>New Eco-friendly Products</h2>
-				<Box>
+				<Box sx={{ display: "flex", gap: 3 }}>
 					<ArticleCard
 						title='Ecozone Rinse Aid, Natural Rinsing Aid for Dishwashers, Dry & Shine'
 						imagePath='/articles/1.png'
 						rating={4.5}
 						priceCad={7.99}
 					/>
+					<ArticleCard
+						title='EcoSlurps Bamboo Cotton Swabs - Tree Planted with Sale '
+						imagePath='/articles/2.png'
+						rating={4.5}
+						priceCad={12.99}
+					/>
+					<ArticleCard
+						title='10 Pcs Bamboo Toothbrush, BPA Free Soft Bristle Toothbrush'
+						imagePath='/articles/3.png'
+						rating={4.5}
+						priceCad={11.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+				</Box>
+
+				<Box
+					sx={{
+						display: "flex",
+						mt: 3,
+						gap: 3,
+						"& img": { width: "100%", height: "fit-content" },
+						flexDirection: {
+							xs: "column",
+							md: "row",
+						},
+					}}
+				>
+					<Image src='/ad-eco.png' alt='Eco-friendly' width={451.28} height={235.66} />
+					<Image src='/ad-cheap.png' alt='Cheap' width={451.28} height={235.66} />
+					<Image src='/ad-best.png' alt='Best' width={451.28} height={235.66} />
 				</Box>
 			</Container>
 		</main>
