@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Eco Essentials Online Shop
 
-## Getting Started
+Eco Essentials is a fictional online shop dedicated to eco-friendly products, built using Next.js and Material Design.
 
-First, run the development server:
+<img src="https://github.com/user-attachments/assets/05a18e8c-b7f9-42f6-b4b2-81ead67c6139" alt="drawing" width="600"/>
+
+## Commands
 
 ```bash
 npm run dev
