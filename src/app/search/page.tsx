@@ -1,15 +1,23 @@
+"use client";
+
 import {
 	Box,
 	Checkbox,
 	Container,
 	FormControlLabel,
 	FormGroup,
+	IconButton,
 	TextField,
 	Typography,
 } from "@mui/material";
 import ArticleCard from "../components/articlecard";
+import { useState } from "react";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export default function Search() {
+	const [showFilters, setShowFilters] = useState(false);
+
 	return (
 		<main>
 			<Container
@@ -23,52 +31,60 @@ export default function Search() {
 			>
 				<Box
 					sx={{
-						width: { xs: "100%", md: "450px" },
-						borderRight: { md: 1 },
-						borderColor: { md: "grey.300" },
+						width: { xs: "100%", md: "470px" },
 					}}
 				>
-					<Typography variant='h5' component='div' sx={{ mb: 2 }}>
-						Filters
-					</Typography>
+					<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+						<Typography variant='h6' component='div' sx={{ mb: 2 }}>
+							Filters
+						</Typography>
 
-					<Typography variant='subtitle1' component='div' sx={{ mb: 1, fontWeight: "medium" }}>
-						Categories
-					</Typography>
-
-					<FormGroup>
-						<FormControlLabel control={<Checkbox />} label='Fashion' />
-						<FormControlLabel control={<Checkbox />} label='Zero Waste' />
-						<FormControlLabel control={<Checkbox />} label='Eco Home' />
-						<FormControlLabel control={<Checkbox />} label='Personal Care' />
-						<FormControlLabel control={<Checkbox />} label='Wellness' />
-					</FormGroup>
-
-					<Typography
-						variant='subtitle1'
-						component='div'
-						sx={{ mt: 2, mb: 1, fontWeight: "medium" }}
-					>
-						Price ($)
-					</Typography>
-
-					<Box sx={{ display: "flex", gap: 1, mr: 1 }}>
-						<TextField label='Min' type='number' variant='standard' />
-						<TextField label='Max' type='number' variant='standard' />
+						<Box>
+							<IconButton onClick={() => setShowFilters(!showFilters)}>
+								{showFilters ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+							</IconButton>
+						</Box>
 					</Box>
 
-					<Typography
-						variant='subtitle1'
-						component='div'
-						sx={{ mt: 2, mb: 1, fontWeight: "medium" }}
-					>
-						Condition
-					</Typography>
+					<Box sx={{ display: { xs: showFilters ? "block" : "none", md: "block" } }}>
+						<Typography variant='subtitle1' component='div' sx={{ mb: 1, fontWeight: "medium" }}>
+							Categories
+						</Typography>
 
-					<FormGroup>
-						<FormControlLabel control={<Checkbox />} label='Refurbished' />
-						<FormControlLabel control={<Checkbox />} label='New' />
-					</FormGroup>
+						<FormGroup>
+							<FormControlLabel control={<Checkbox />} label='Fashion' />
+							<FormControlLabel control={<Checkbox />} label='Zero Waste' />
+							<FormControlLabel control={<Checkbox />} label='Eco Home' />
+							<FormControlLabel control={<Checkbox />} label='Personal Care' />
+							<FormControlLabel control={<Checkbox />} label='Wellness' />
+						</FormGroup>
+
+						<Typography
+							variant='subtitle1'
+							component='div'
+							sx={{ mt: 2, mb: 1, fontWeight: "medium" }}
+						>
+							Price ($)
+						</Typography>
+
+						<Box sx={{ display: "flex", gap: 1, mr: 2 }}>
+							<TextField label='Min' type='number' variant='standard' />
+							<TextField label='Max' type='number' variant='standard' />
+						</Box>
+
+						<Typography
+							variant='subtitle1'
+							component='div'
+							sx={{ mt: 2, mb: 1, fontWeight: "medium" }}
+						>
+							Condition
+						</Typography>
+
+						<FormGroup>
+							<FormControlLabel control={<Checkbox />} label='Refurbished' />
+							<FormControlLabel control={<Checkbox />} label='New' />
+						</FormGroup>
+					</Box>
 				</Box>
 				<Box>
 					<Typography variant='h5' component='h2' sx={{ mb: 2 }}>
