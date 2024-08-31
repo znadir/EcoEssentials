@@ -14,9 +14,14 @@ import ArticleCard from "../components/articlecard";
 import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { useSearchParams } from "next/navigation";
 
 export default function Search() {
 	const [showFilters, setShowFilters] = useState(false);
+
+	const searchParams = useSearchParams();
+
+	const query = searchParams.get("query");
 
 	return (
 		<main>
@@ -88,7 +93,7 @@ export default function Search() {
 				</Box>
 				<Box>
 					<Typography variant='h5' component='h2' sx={{ mb: 2 }}>
-						Search for : Test
+						Search for : {query}
 					</Typography>
 					<Box
 						sx={{
