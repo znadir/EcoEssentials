@@ -1,11 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import { AppBar, Box, Button, Container, IconButton, InputBase, Paper } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function NavBar() {
+	const router = useRouter();
+	const [searchText, setSearchText] = useState("");
+
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		router.push(`/search?query=${encodeURIComponent(searchText)}`);
+	};
+
 	return (
 		<>
 			<AppBar position='sticky' color='default'>
@@ -64,6 +76,7 @@ export default function NavBar() {
 							</Link>
 							<Paper
 								component='form'
+								onSubmit={handleSubmit}
 								sx={{
 									p: "0px 4px",
 									display: "flex",
@@ -73,8 +86,13 @@ export default function NavBar() {
 									borderRadius: 2,
 								}}
 							>
-								<InputBase sx={{ ml: 1, flex: 1 }} placeholder='Search Eco Essentials' />
-								<IconButton type='button' sx={{ p: "10px" }} aria-label='search'>
+								<InputBase
+									sx={{ ml: 1, flex: 1 }}
+									value={searchText}
+									onChange={(e) => setSearchText(e.target.value)}
+									placeholder='Search Eco Essentials'
+								/>
+								<IconButton type='submit' sx={{ p: "10px" }} aria-label='search'>
 									<SearchIcon />
 								</IconButton>
 							</Paper>
