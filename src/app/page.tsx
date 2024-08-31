@@ -5,7 +5,7 @@ import ArticleCard from "./components/articlecard";
 export default function Home() {
 	return (
 		<main>
-			<Container maxWidth='xl' sx={{ my: 1 }}>
+			<Container maxWidth='xl' sx={{ mt: 0 }}>
 				<Box sx={{ display: { xs: "none", md: "block" } }}>
 					<Image
 						style={{ width: "100%", height: "100%" }}
