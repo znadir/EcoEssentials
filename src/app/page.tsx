@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import ArticleCard from "./components/articlecard";
 
@@ -26,7 +26,9 @@ export default function Home() {
 					/>
 				</Box>
 
-				<h2>New Eco-friendly Products</h2>
+				<Typography variant='h5' component='h2' sx={{ mb: 2, mt: 3 }}>
+					New Eco-friendly Products
+				</Typography>
 				<Box
 					sx={{
 						display: "grid",
@@ -36,7 +38,7 @@ export default function Home() {
 							md: "repeat(4, 1fr)",
 							lg: "repeat(6, 1fr)",
 						},
-						gap: 3,
+						gap: 2,
 					}}
 				>
 					<ArticleCard
@@ -82,7 +84,7 @@ export default function Home() {
 					sx={{
 						display: "flex",
 						mt: 3,
-						gap: 3,
+						gap: 2,
 						"& img": { width: "100%", height: "fit-content" },
 						flexDirection: {
 							xs: "column",
@@ -95,7 +97,9 @@ export default function Home() {
 					<Image src='/ad-best.png' alt='Best' width={451.28} height={235.66} />
 				</Box>
 
-				<h2>More Products</h2>
+				<Typography variant='h5' component='h2' sx={{ mb: 2, mt: 3 }}>
+					More Products
+				</Typography>
 				<Box
 					sx={{
 						display: "grid",
@@ -105,7 +109,7 @@ export default function Home() {
 							md: "repeat(4, 1fr)",
 							lg: "repeat(6, 1fr)",
 						},
-						gap: 3,
+						gap: 2,
 					}}
 				>
 					<ArticleCard
