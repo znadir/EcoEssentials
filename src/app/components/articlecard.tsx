@@ -12,7 +12,7 @@ export default function ArticleCard({
 	priceCad: number;
 }) {
 	return (
-		<Card sx={{ maxWidth: 250 }}>
+		<Card>
 			<CardActionArea>
 				<CardMedia component='img' image={imagePath} alt='' />
 
