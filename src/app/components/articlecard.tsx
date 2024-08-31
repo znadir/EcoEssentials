@@ -1,4 +1,7 @@
+"use client";
+
 import { Card, CardActionArea, CardContent, CardMedia, Rating, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function ArticleCard({
 	title,
@@ -11,9 +14,11 @@ export default function ArticleCard({
 	rating: number;
 	priceCad: number;
 }) {
+	const router = useRouter();
+
 	return (
 		<Card>
-			<CardActionArea>
+			<CardActionArea onClick={() => router.push("/article")}>
 				<CardMedia component='img' image={imagePath} alt='' />
 
 				<CardContent>
