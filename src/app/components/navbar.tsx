@@ -105,14 +105,16 @@ export default function NavBar() {
 									Login/Sign Up
 								</Button>
 							</Link>
-							<Button
-								variant='contained'
-								size='medium'
-								color='secondary'
-								startIcon={<ShoppingCartIcon />}
-							>
-								Cart
-							</Button>
+							<Link href='/cart'>
+								<Button
+									variant='contained'
+									size='medium'
+									color='secondary'
+									startIcon={<ShoppingCartIcon />}
+								>
+									Cart
+								</Button>
+							</Link>
 						</Box>
 					</Box>
 				</Container>
