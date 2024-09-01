@@ -9,8 +9,9 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
+import Link from "next/link";
 
-export default function CreateAccountPage() {
+export default function LoginSignup() {
 	return (
 		<Container
 			maxWidth='xl'
@@ -19,15 +20,12 @@ export default function CreateAccountPage() {
 			}}
 		>
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<Card variant='outlined' sx={{ p: 2, width: "100%", maxWidth: "850px" }}>
+				<Card variant='outlined' sx={{ p: 3, width: "100%", maxWidth: "850px" }}>
 					<Typography variant='h6' sx={{ mb: 2 }}>
-						Create Account
-					</Typography>
-					<Typography variant='body1' sx={{ mb: 2 }}>
-						Please fill out the following information to create an account.
+						Login/Sign Up
 					</Typography>
 
-					<FormControl sx={{ display: "flex", gap: 1 }} fullWidth>
+					<FormControl sx={{ display: "flex", gap: 1, mb: 2 }} fullWidth>
 						<Box sx={{ display: "flex", gap: 1, width: "100%" }}>
 							<TextField label='First Name' fullWidth />
 							<TextField label='Last Name' fullWidth />
@@ -39,7 +37,7 @@ export default function CreateAccountPage() {
 						<FormControlLabel control={<Checkbox />} label='Agree to the Terms and Conditions' />
 
 						<Button
-							sx={{ mt: 2, width: "fit-content" }}
+							sx={{ mt: 1, width: "fit-content" }}
 							size='large'
 							type='submit'
 							variant='contained'
@@ -47,6 +45,8 @@ export default function CreateAccountPage() {
 							Create Account
 						</Button>
 					</FormControl>
+
+					<Link href='/login'>Already have an account? Login here.</Link>
 				</Card>
 			</Box>
 		</Container>

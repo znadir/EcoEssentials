@@ -100,9 +100,11 @@ export default function NavBar() {
 						</Box>
 
 						<Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-							<Button variant='contained' size='medium' startIcon={<AccountCircleIcon />}>
-								Account
-							</Button>
+							<Link href='/login'>
+								<Button variant='contained' size='medium' startIcon={<AccountCircleIcon />}>
+									Login/Sign Up
+								</Button>
+							</Link>
 							<Button
 								variant='contained'
 								size='medium'
