@@ -1,5 +1,4 @@
 "use client";
-
 import {
 	Box,
 	Checkbox,
@@ -11,17 +10,21 @@ import {
 	Typography,
 } from "@mui/material";
 import ArticleCard from "../components/articlecard";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { useSearchParams } from "next/navigation";
 
-export default function Search() {
-	const [showFilters, setShowFilters] = useState(false);
-
+function Query() {
 	const searchParams = useSearchParams();
 
 	const query = searchParams.get("query");
+
+	return <>{query}</>;
+}
+
+export default function Search() {
+	const [showFilters, setShowFilters] = useState(false);
 
 	return (
 		<main>
@@ -93,7 +96,10 @@ export default function Search() {
 				</Box>
 				<Box>
 					<Typography variant='h5' component='h2' sx={{ mb: 2 }}>
-						Search for : {query}
+						Search for :{" "}
+						<Suspense>
+							<Query />
+						</Suspense>
 					</Typography>
 					<Box
 						sx={{
