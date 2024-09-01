@@ -26,6 +26,26 @@ const labels: { [index: string]: string } = {
 	5: "Excellent+",
 };
 
+function Review({
+	nom,
+	rating,
+	commentaire,
+}: {
+	nom: string;
+	rating: number;
+	commentaire: string;
+}) {
+	return (
+		<Card sx={{ p: 2 }}>
+			<Typography variant='h6'>{nom}</Typography>
+			<Rating value={rating} readOnly />
+			<Typography variant='body1' sx={{ mt: 2 }}>
+				{commentaire}
+			</Typography>
+		</Card>
+	);
+}
+
 export default function Article() {
 	const rating = 4.5;
 	const priceCad = 10.99;
@@ -51,7 +71,7 @@ export default function Article() {
 						mt: 2,
 					}}
 				>
-					<Card sx={{ flex: 2 }}>
+					<Card sx={{ flex: 2, height: "100%" }}>
 						<CardMedia component='img' image='/articles/1.png' alt='' />
 						<Box sx={{ display: "flex" }}>
 							<Image src='/articles/1.png' alt='' width={80} height={80} />
@@ -93,6 +113,40 @@ export default function Article() {
 							wash. Suitable for use with septic tanks, this product has ben produce
 						</Typography>
 					</Box>
+				</Box>
+
+				<Typography component='h1' variant='h6' sx={{ mt: 3, mb: 1 }}>
+					Customer reviews
+				</Typography>
+				<Rating size='large' value={rating} precision={0.5} readOnly />
+				<Box
+					sx={{
+						display: "grid",
+						gridTemplateColumns: {
+							xs: "repeat(1, 1fr)",
+							sm: "repeat(2, 1fr)",
+							md: "repeat(3, 1fr)",
+							lg: "repeat(4, 1fr)",
+						},
+						mt: 2,
+						gap: 2,
+					}}
+				>
+					<Review
+						nom='John Doe'
+						rating={4}
+						commentaire='This product is great! I love it. I will definitely buy it again.'
+					/>
+					<Review
+						nom='Jane Doe'
+						rating={5}
+						commentaire='I love this product! It is amazing. I will definitely buy it again.'
+					/>
+					<Review
+						nom='Alice Doe'
+						rating={3}
+						commentaire='This product is ok. I might buy it again.'
+					/>
 				</Box>
 			</Container>
 		</main>
