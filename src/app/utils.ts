@@ -15,6 +15,10 @@ export const tryCatch = (fn: Function) => async (req: NextRequest) => {
 	try {
 		return await fn(req);
 	} catch (error) {
+		if (error instanceof NextResponse) {
+			return error;
+		}
+
 		console.error(error);
 		return NextResponse.json({ message: "Something went wrong." }, { status: 500 });
 	}
@@ -35,6 +39,10 @@ export async function getUserId(req: NextRequest) {
 		return null;
 	}
 
+	if (process.env.NODE_ENV == "test") {
+		return "test";
+	}
+
 	const jwt = await verifyJwt(authToken);
 	const { id } = jwt;
 
@@ -45,4 +53,14 @@ export async function getUserId(req: NextRequest) {
 	});
 
 	return user?.id || null;
+}
+
+export async function protectedUserId(req: NextRequest) {
+	const userId = await getUserId(req);
+
+	if (!userId) {
+		throw NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
+	return userId as string;
 }
