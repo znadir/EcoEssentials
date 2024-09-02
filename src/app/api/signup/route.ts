@@ -1,5 +1,5 @@
 import prisma from "@/app/lib/prisma";
-import { hashPassword, tryCatch } from "@/app/utils";
+import { hashPassword, signJwt, tryCatch } from "@/app/utils";
 
 export const POST = tryCatch(async (request: Request) => {
 	// get body params
@@ -34,7 +34,7 @@ export const POST = tryCatch(async (request: Request) => {
 	const hashedPassword = await hashPassword(password);
 
 	// create user
-	await prisma.user.create({
+	const dbUser = await prisma.user.create({
 		data: {
 			name,
 			first_name: firstName,
@@ -44,5 +44,8 @@ export const POST = tryCatch(async (request: Request) => {
 		},
 	});
 
-	return Response.json({ message: "User created" });
+	// create session
+	const token = await signJwt({ id: dbUser.id });
+
+	return Response.json({ message: "User created", token });
 });
