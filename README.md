@@ -26,4 +26,6 @@ npm run build
 
 - `GET /api/cart`
 
-- `PATCH /account`
+- `PATCH /api/account`
+
+- `POST /api/articles/{id}/reviews`
