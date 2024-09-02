@@ -15,8 +15,8 @@ export default function NavBar() {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		setSearchText("");
 		router.push(`/search?query=${encodeURIComponent(searchText)}`);
+		setSearchText("");
 	};
 
 	return (

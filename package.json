@@ -1,30 +1,37 @@
 {
-  "name": "eco-essentials",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@emotion/cache": "^11.13.1",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.0.0",
-    "@mui/material": "^6.0.0",
-    "@mui/material-nextjs": "^6.0.0",
-    "next": "14.2.7",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.7",
-    "typescript": "^5"
-  }
+	"name": "eco-essentials",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"postinstall": "prisma generate",
+		"prisma-seed": "dotenv -e .env.local -- npx prisma db push",
+		"prisma-studio": "dotenv -e .env.local -- npx prisma studio",
+		"prisma-generate": "dotenv -e .env.local -- npx prisma generate"
+	},
+	"dependencies": {
+		"@emotion/cache": "^11.13.1",
+		"@emotion/react": "^11.13.3",
+		"@emotion/styled": "^11.13.0",
+		"@mui/icons-material": "^6.0.0",
+		"@mui/material": "^6.0.0",
+		"@mui/material-nextjs": "^6.0.0",
+		"@prisma/client": "5.19.0",
+		"next": "14.2.7",
+		"pg": "^8.12.0",
+		"react": "^18",
+		"react-dom": "^18"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"eslint": "^8",
+		"eslint-config-next": "14.2.7",
+		"prisma": "^5.19.0",
+		"typescript": "^5"
+	}
 }

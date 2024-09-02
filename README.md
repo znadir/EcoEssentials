@@ -11,3 +11,19 @@ npm run dev
 
 npm run build
 ```
+
+## API endpoints
+
+- `POST /api/signup`
+
+- `POST /api/login`
+
+- `GET /api/articles`
+
+- `GET /api/articles/{id}`
+
+- `POST /api/cart`
+
+- `GET /api/cart`
+
+- `PATCH /account`
