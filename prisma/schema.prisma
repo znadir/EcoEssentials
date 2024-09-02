@@ -14,6 +14,7 @@ model user {
   email         String    @unique
   passwordHash  String
   receiveEmails Boolean
+  article       article[]
 }
 
 model article {
