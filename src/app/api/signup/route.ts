@@ -32,16 +32,16 @@ export const POST = tryCatch(async (request: NextRequest) => {
 		return Response.json({ error: "Email already in use" }, { status: 400 });
 	}
 
-	const hashedPassword = await hashPassword(password);
+	const passwordHash = await hashPassword(password);
 
 	// create user
 	const dbUser = await prisma.user.create({
 		data: {
 			name,
-			first_name: firstName,
+			firstName,
 			email,
-			password_hash: hashedPassword,
-			receive_emails: receiveEmails,
+			passwordHash,
+			receiveEmails,
 		},
 	});
 

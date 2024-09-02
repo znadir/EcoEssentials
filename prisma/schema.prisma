@@ -8,23 +8,24 @@ datasource db {
 }
 
 model user {
-  id             String         @id @unique @default(cuid())
-  first_name     String
-  name           String
-  email          String         @unique
-  password_hash  String
-  receive_emails Boolean
-  cart           cart_article[]
+  id            String    @id @unique @default(cuid())
+  firstName     String
+  name          String
+  email         String    @unique
+  passwordHash  String
+  receiveEmails Boolean
+  cart          article[]
 }
 
 model article {
-  id           String         @id @unique @default(cuid())
-  title        String
-  description  String
-  price        Int
-  images       Bytes[]
-  reviews      review[]
-  cart_article cart_article[]
+  id          String   @id @unique @default(cuid())
+  title       String
+  description String
+  price       Int
+  images      Bytes[]
+  reviews     review[]
+  user        user?    @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 model review {
@@ -33,12 +34,4 @@ model review {
   stars     Int
   article   article? @relation(fields: [articleId], references: [id])
   articleId String?
-}
-
-model cart_article {
-  id         String   @id @unique @default(cuid())
-  article_id article? @relation(fields: [articleId], references: [id])
-  user       user?    @relation(fields: [userId], references: [id])
-  userId     String?
-  articleId  String?
 }

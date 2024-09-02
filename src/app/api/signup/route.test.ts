@@ -1,18 +1,8 @@
 /**
  * @jest-environment node
  */
-import prisma from "@/app/lib/prisma";
 import { POST } from "./route";
-
-jest.mock("@/app/lib/prisma", () => ({
-	__esModule: true,
-	default: {
-		user: {
-			findUnique: jest.fn(),
-			create: jest.fn(),
-		},
-	},
-}));
+import { prismaMock } from "@/app/lib/singleton";
 
 it("should signup the user", async () => {
 	const newUser = {
@@ -23,11 +13,13 @@ it("should signup the user", async () => {
 		receiveEmails: false,
 	};
 	// mock the request
-	(prisma.user.findUnique as jest.Mock).mockResolvedValue(null);
-	(prisma.user.create as jest.Mock).mockResolvedValue(newUser);
+	prismaMock.user.findUnique.mockResolvedValue(null);
+	prismaMock.user.create.mockResolvedValue({ id: "abc", ...newUser });
 
 	const response = await POST({ json: async () => newUser } as any);
 	const body = await response.json();
 
 	expect(response.status).toBe(201);
+	expect(body.message).toBe("User created");
+	expect(body.token).toBeTruthy();
 });
