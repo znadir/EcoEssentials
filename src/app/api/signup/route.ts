@@ -21,6 +21,11 @@ export const POST = tryCatch(async (request: NextRequest) => {
 		return Response.json({ message: "Invalid email" }, { status: 400 });
 	}
 
+	// verify if password is strong enough
+	if (password.length < 8) {
+		return Response.json({ message: "Password too short" }, { status: 400 });
+	}
+
 	// verify if email is already in use
 	const user = await prisma.user.findUnique({
 		where: {

@@ -9,7 +9,7 @@ it("should signup the user", async () => {
 		name: "john",
 		firstName: "patrick",
 		email: "johnpatricke54@kmail.com",
-		password: "abc",
+		password: "12345678",
 		receiveEmails: false,
 	};
 	// mock the request

@@ -33,7 +33,8 @@ export async function verifyJwt(token: string) {
 }
 
 export async function getUserId(req: NextRequest) {
-	const authToken = req.cookies.get("token")?.value;
+	const authToken =
+		req.cookies.get("token")?.value || req.headers.get("Authorization")?.replace("Bearer ", "");
 
 	if (!authToken) {
 		return null;
