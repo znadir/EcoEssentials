@@ -14,7 +14,12 @@ it("should signup the user", async () => {
 	};
 	// mock the request
 	prismaMock.user.findUnique.mockResolvedValue(null);
-	prismaMock.user.create.mockResolvedValue({ id: "abc", ...newUser });
+	const { password, ...newUserWithoutPass } = newUser;
+	prismaMock.user.create.mockResolvedValue({
+		id: "abc",
+		...newUserWithoutPass,
+		passwordHash: "abc",
+	});
 
 	const response = await POST({ json: async () => newUser } as any);
 	const body = await response.json();

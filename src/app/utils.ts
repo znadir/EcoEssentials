@@ -11,7 +11,7 @@ export const tryCatch = (fn: Function) => async (req: NextRequest) => {
 		return await fn(req);
 	} catch (error) {
 		console.error(error);
-		return NextResponse.json({ error: "Something went wrong." }, { status: 500 });
+		return NextResponse.json({ message: "Something went wrong." }, { status: 500 });
 	}
 };
 
