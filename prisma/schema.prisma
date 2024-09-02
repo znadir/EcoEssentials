@@ -14,7 +14,6 @@ model user {
   email         String    @unique
   passwordHash  String
   receiveEmails Boolean
-  cart          article[]
 }
 
 model article {
