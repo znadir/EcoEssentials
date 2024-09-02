@@ -1,7 +1,8 @@
 import prisma from "@/app/lib/prisma";
 import { hashPassword, signJwt, tryCatch } from "@/app/utils";
+import { NextRequest } from "next/server";
 
-export const POST = tryCatch(async (request: Request) => {
+export const POST = tryCatch(async (request: NextRequest) => {
 	// get body params
 	const { name, firstName, email, password, receiveEmails } = await request.json();
 
@@ -47,5 +48,5 @@ export const POST = tryCatch(async (request: Request) => {
 	// create session
 	const token = await signJwt({ id: dbUser.id });
 
-	return Response.json({ message: "User created", token });
+	return Response.json({ message: "User created", token }, { status: 201 });
 });
