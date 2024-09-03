@@ -11,18 +11,20 @@ export async function comparePassword(password: string, hash: string) {
 	return await bcrypt.compare(password, hash);
 }
 
-export const tryCatch = (fn: Function) => async (req: NextRequest) => {
-	try {
-		return await fn(req);
-	} catch (error) {
-		if (error instanceof NextResponse) {
-			return error;
-		}
+export const tryCatch =
+	(fn: Function) =>
+	async (req: NextRequest, other: any = undefined) => {
+		try {
+			return await fn(req, other);
+		} catch (error) {
+			if (error instanceof NextResponse) {
+				return error;
+			}
 
-		console.error(error);
-		return NextResponse.json({ message: "Something went wrong." }, { status: 500 });
-	}
-};
+			console.error(error);
+			return NextResponse.json({ message: "Something went wrong." }, { status: 500 });
+		}
+	};
 
 export async function signJwt(payload: any) {
 	return await jwt.sign(payload, process.env.JWT_SECRET);
