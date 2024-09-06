@@ -11,8 +11,7 @@
 		"prisma-seed": "npx prisma db push && npx prisma db seed",
 		"prisma-studio": "npx prisma studio",
 		"prisma-generate": "npx prisma generate",
-		"test": "jest",
-		"build:production": "npx prisma db push && npx prisma db seed"
+		"test": "jest"
 	},
 	"dependencies": {
 		"@emotion/cache": "^11.13.1",

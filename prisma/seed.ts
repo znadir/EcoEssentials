@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 async function main() {
 	const toothbrush = await prisma.article.upsert({
 		where: {
-			slug: "toothbrush",
+			slug: "bio-toothbrush",
 		},
 		update: {},
 		create: {
@@ -19,7 +19,23 @@ async function main() {
 			categories: ["health", "hygiene"],
 		},
 	});
-	console.log({ toothbrush });
+	const spoons = await prisma.article.upsert({
+		where: {
+			slug: "compostable-spoons",
+		},
+		update: {},
+		create: {
+			slug: "compostable-spoons",
+			title:
+				"100% Compostable Spoons - 500 Large Disposable Utensils (6.5 in.) Bulk Size Eco Friendly Durable and Heat Resistant Alternative to Plastic Spoons with Convenient Tray",
+			description:
+				"\n\n✔️ ECO FRIENDLY TESTED / BPI CERTIFIED 100% COMPOSTABLE - Our eco cutlery set is certified by Biodegradable Product Institute and TUV which complies with USA and European ASTM D6400 & EN13432 High Standards. Ensure environmental friendliness by accepting no lower standard than BPI Certified Compostable Utensils made from Renewable and Sustainable Plant Resources - ZERO WASTE. ZERO GUILT. All contents including recyclable packaging are PLASTIC FREE!\n\n✔️ ALL NATURAL PLANT BASED / ALL SAFE - Enjoy your food with Non-GMO Corn Based Cutlery made in a registered facility. This renewable resource (corn) is grown and harvested ethically right here in the USA. No BPA, Chlorine or Toxic Chemicals that may be found in disposable plastic utensils. No Risk of Splinters or Popsicle after taste while eating or tasting like with Wooden Utensils.\n\n✔️ 60 DAY MONEY BACK GUARANTEE - We believe you will be totally satisfied by our safe, environmentally friendly tableware. Perfect for Corporate, Camping, Picnics, Lunches, Catering, BBQs, Party, Wedding and Restaurants. If not, we will gladly give you a full refund! Proudly based in San Diego, CA.",
+			price: 68.55,
+			images: ["https://i.ibb.co/NL8yscy/cuillerers.png"],
+			categories: ["kitchen", "utensils"],
+		},
+	});
+	console.log({ toothbrush, spoons });
 }
 main()
 	.then(async () => {
