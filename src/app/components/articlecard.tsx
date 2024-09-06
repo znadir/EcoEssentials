@@ -13,7 +13,7 @@ export default function ArticleCard({
 	title: string;
 	imagePath: string;
 	rating: number;
-	priceCad: number;
+	priceCad: string;
 	href: string;
 }) {
 	const router = useRouter();

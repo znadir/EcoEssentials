@@ -103,7 +103,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 						</Button>
 
 						<Typography component='p' variant='body1' sx={{ mt: 2 }} color='text.secondary'>
-							{data.article.description.split("\n").map((line, index) => (
+							{data.article.description.split("\n").map((line: string, index: number) => (
 								<span key={index}>
 									{line}
 									{index < data.article.description.split("\n").length - 1 && <br />}
