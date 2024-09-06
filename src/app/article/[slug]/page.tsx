@@ -80,9 +80,9 @@ export default function Article({ params }: { params: { slug: string } }) {
 					}}
 				>
 					<Card sx={{ flex: 2, height: "100%" }}>
-						<CardMedia component='img' image='/articles/1.png' alt='' />
+						<CardMedia component='img' image={data.article.images[0]} alt='' />
 						<Box sx={{ display: "flex" }}>
-							<Image src='/articles/1.png' alt='' width={80} height={80} />
+							<Image src={data.article.images[0]} alt='' width={80} height={80} />
 						</Box>
 					</Card>
 					<Box sx={{ flex: 5 }}>
@@ -103,7 +103,12 @@ export default function Article({ params }: { params: { slug: string } }) {
 						</Button>
 
 						<Typography component='p' variant='body1' sx={{ mt: 2 }} color='text.secondary'>
-							{data.article.description}
+							{data.article.description.split("\n").map((line, index) => (
+								<span key={index}>
+									{line}
+									{index < data.article.description.split("\n").length - 1 && <br />}
+								</span>
+							))}
 						</Typography>
 					</Box>
 				</Box>

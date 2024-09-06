@@ -7,6 +7,12 @@ Eco Essentials is a fictional online shop dedicated to eco-friendly products, bu
 ## Commands
 
 ```bash
+npm run prisma-seed
+
+npm run prisma-generate
+
+npm run prisma-studio
+
 npm run dev
 
 npm run build

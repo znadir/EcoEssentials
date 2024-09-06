@@ -27,7 +27,7 @@ export default function Home() {
 				</Box>
 
 				<Typography variant='h5' component='h2' sx={{ mb: 2, mt: 3 }}>
-					New Eco-friendly Products
+					Our Eco Products
 				</Typography>
 				<Box
 					sx={{
@@ -42,22 +42,10 @@ export default function Home() {
 					}}
 				>
 					<ArticleCard
-						title='Ecozone Rinse Aid, Natural Rinsing Aid for Dishwashers, Dry & Shine'
-						imagePath='/articles/1.png'
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
 						rating={4.5}
-						priceCad={7.99}
-					/>
-					<ArticleCard
-						title='EcoSlurps Bamboo Cotton Swabs - Tree Planted with Sale '
-						imagePath='/articles/2.png'
-						rating={4.5}
-						priceCad={12.99}
-					/>
-					<ArticleCard
-						title='10 Pcs Bamboo Toothbrush, BPA Free Soft Bristle Toothbrush'
-						imagePath='/articles/3.png'
-						rating={4.5}
-						priceCad={11.99}
+						priceCad={10.99}
 					/>
 					<ArticleCard
 						title='Eco-Friendly Placeholder'
@@ -65,7 +53,78 @@ export default function Home() {
 						rating={4.5}
 						priceCad={10.99}
 					/>
-
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
+					<ArticleCard
+						title='Eco-Friendly Placeholder'
+						imagePath='/articles/placeholder.png'
+						rating={4.5}
+						priceCad={10.99}
+					/>
 					<ArticleCard
 						title='Eco-Friendly Placeholder'
 						imagePath='/articles/placeholder.png'
@@ -79,7 +138,6 @@ export default function Home() {
 						priceCad={10.99}
 					/>
 				</Box>
-
 				<Box
 					sx={{
 						display: "flex",
@@ -95,119 +153,6 @@ export default function Home() {
 					<Image src='/ad-eco.png' alt='Eco-friendly' width={451.28} height={235.66} />
 					<Image src='/ad-cheap.png' alt='Cheap' width={451.28} height={235.66} />
 					<Image src='/ad-best.png' alt='Best' width={451.28} height={235.66} />
-				</Box>
-
-				<Typography variant='h5' component='h2' sx={{ mb: 2, mt: 3 }}>
-					More Products
-				</Typography>
-				<Box
-					sx={{
-						display: "grid",
-						gridTemplateColumns: {
-							xs: "repeat(2, 1fr)",
-							sm: "repeat(3, 1fr)",
-							md: "repeat(4, 1fr)",
-							lg: "repeat(6, 1fr)",
-						},
-						gap: 2,
-					}}
-				>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
 				</Box>
 			</Container>
 		</main>

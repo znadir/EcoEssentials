@@ -22,7 +22,7 @@ model article {
   title       String
   description String
   price       Int
-  images      Bytes[]
+  images      String[]
   reviews     review[]
   categories  String[]
 }
