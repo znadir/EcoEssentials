@@ -1,3 +1,4 @@
+"use client";
 import {
 	Box,
 	Breadcrumbs,
@@ -12,6 +13,8 @@ import {
 import Image from "next/image";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import EnergySavingsLeafIcon from "@mui/icons-material/EnergySavingsLeaf";
+import useGetSWR from "../../lib/useGetSWR";
+import Loader from "@/app/components/loader";
 
 const labels: { [index: string]: string } = {
 	0.5: "Useless",
@@ -46,11 +49,15 @@ function Review({
 	);
 }
 
-export default function Article() {
+export default function Article({ params }: { params: { slug: string } }) {
+	const { data, isLoading, error } = useGetSWR(`/api/articles/${params.slug}`);
+
 	const rating = 4.5;
 	const priceCad = 10.99;
 
-	return (
+	return isLoading ? (
+		<Loader />
+	) : (
 		<main>
 			<Container maxWidth='xl'>
 				<Breadcrumbs sx={{ mt: 3 }}>

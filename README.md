@@ -10,6 +10,7 @@ Eco Essentials is a fictional online shop dedicated to eco-friendly products, bu
 npm run dev
 
 npm run build
+
 ```
 
 ## API endpoints

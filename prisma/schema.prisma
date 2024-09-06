@@ -18,6 +18,7 @@ model user {
 
 model article {
   id          String   @id @unique @default(cuid())
+  slug        String   @unique
   title       String
   description String
   price       Int
