@@ -1,8 +1,16 @@
+"use client";
+
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import ArticleCard from "./components/articlecard";
+import useGetSWR from "./lib/useGetSWR";
+import Loader from "./components/loader";
+import ErrorCard from "./components/errorcard";
+import type { article } from "@prisma/client";
 
 export default function Home() {
+	const { data, isLoading, error } = useGetSWR("/api/articles");
+
 	return (
 		<main>
 			<Container maxWidth='xl' sx={{ mt: 0 }}>
@@ -29,115 +37,36 @@ export default function Home() {
 				<Typography variant='h5' component='h2' sx={{ mb: 2, mt: 3 }}>
 					Our Eco Products
 				</Typography>
-				<Box
-					sx={{
-						display: "grid",
-						gridTemplateColumns: {
-							xs: "repeat(2, 1fr)",
-							sm: "repeat(3, 1fr)",
-							md: "repeat(4, 1fr)",
-							lg: "repeat(6, 1fr)",
-						},
-						gap: 2,
-					}}
-				>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-					<ArticleCard
-						title='Eco-Friendly Placeholder'
-						imagePath='/articles/placeholder.png'
-						rating={4.5}
-						priceCad={10.99}
-					/>
-				</Box>
+
+				{isLoading ? (
+					<Loader />
+				) : error ? (
+					<ErrorCard />
+				) : (
+					<Box
+						sx={{
+							display: "grid",
+							gridTemplateColumns: {
+								xs: "repeat(2, 1fr)",
+								sm: "repeat(3, 1fr)",
+								md: "repeat(4, 1fr)",
+								lg: "repeat(6, 1fr)",
+							},
+							gap: 2,
+						}}
+					>
+						{data.articles.map((article: article) => (
+							<ArticleCard
+								key={article.id}
+								title={article.title}
+								imagePath={article.images[0]}
+								rating={4.5}
+								priceCad={Number(article.price).toFixed(2)}
+								href={`/article/${article.slug}`}
+							/>
+						))}
+					</Box>
+				)}
 				<Box
 					sx={{
 						display: "flex",

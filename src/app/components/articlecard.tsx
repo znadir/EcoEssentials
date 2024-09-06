@@ -8,17 +8,19 @@ export default function ArticleCard({
 	imagePath,
 	rating,
 	priceCad,
+	href,
 }: {
 	title: string;
 	imagePath: string;
 	rating: number;
 	priceCad: number;
+	href: string;
 }) {
 	const router = useRouter();
 
 	return (
 		<Card>
-			<CardActionArea onClick={() => router.push("/article")}>
+			<CardActionArea onClick={() => router.push(href)}>
 				<CardMedia component='img' image={imagePath} alt='' />
 
 				<CardContent>
