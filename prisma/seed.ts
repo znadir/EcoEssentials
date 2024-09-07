@@ -29,13 +29,75 @@ async function main() {
 			title:
 				"100% Compostable Spoons - 500 Large Disposable Utensils (6.5 in.) Bulk Size Eco Friendly Durable and Heat Resistant Alternative to Plastic Spoons with Convenient Tray",
 			description:
-				"\n\n✔️ ECO FRIENDLY TESTED / BPI CERTIFIED 100% COMPOSTABLE - Our eco cutlery set is certified by Biodegradable Product Institute and TUV which complies with USA and European ASTM D6400 & EN13432 High Standards. Ensure environmental friendliness by accepting no lower standard than BPI Certified Compostable Utensils made from Renewable and Sustainable Plant Resources - ZERO WASTE. ZERO GUILT. All contents including recyclable packaging are PLASTIC FREE!\n\n✔️ ALL NATURAL PLANT BASED / ALL SAFE - Enjoy your food with Non-GMO Corn Based Cutlery made in a registered facility. This renewable resource (corn) is grown and harvested ethically right here in the USA. No BPA, Chlorine or Toxic Chemicals that may be found in disposable plastic utensils. No Risk of Splinters or Popsicle after taste while eating or tasting like with Wooden Utensils.\n\n✔️ 60 DAY MONEY BACK GUARANTEE - We believe you will be totally satisfied by our safe, environmentally friendly tableware. Perfect for Corporate, Camping, Picnics, Lunches, Catering, BBQs, Party, Wedding and Restaurants. If not, we will gladly give you a full refund! Proudly based in San Diego, CA.",
+				"✔️ ECO FRIENDLY TESTED / BPI CERTIFIED 100% COMPOSTABLE - Our eco cutlery set is certified by Biodegradable Product Institute and TUV which complies with USA and European ASTM D6400 & EN13432 High Standards. Ensure environmental friendliness by accepting no lower standard than BPI Certified Compostable Utensils made from Renewable and Sustainable Plant Resources - ZERO WASTE. ZERO GUILT. All contents including recyclable packaging are PLASTIC FREE!\n\n✔️ ALL NATURAL PLANT BASED / ALL SAFE - Enjoy your food with Non-GMO Corn Based Cutlery made in a registered facility. This renewable resource (corn) is grown and harvested ethically right here in the USA. No BPA, Chlorine or Toxic Chemicals that may be found in disposable plastic utensils. No Risk of Splinters or Popsicle after taste while eating or tasting like with Wooden Utensils.\n\n✔️ 60 DAY MONEY BACK GUARANTEE - We believe you will be totally satisfied by our safe, environmentally friendly tableware. Perfect for Corporate, Camping, Picnics, Lunches, Catering, BBQs, Party, Wedding and Restaurants. If not, we will gladly give you a full refund! Proudly based in San Diego, CA.",
 			price: 68.55,
 			images: ["https://i.ibb.co/NL8yscy/cuillerers.png"],
 			categories: ["kitchen", "utensils"],
 		},
 	});
-	console.log({ toothbrush, spoons });
+	const cleanPeople = await prisma.article.upsert({
+		where: {
+			slug: "clean-people",
+		},
+		update: {},
+		create: {
+			slug: "clean-people",
+			title:
+				"The Clean People Fabric Softener Sheets - Dryer Sheets - Softens & Removes Static Cling - Vegan Laundry Softener With Essential Oils - Fresh Scent, 120 Pack ",
+			description:
+				"Our Fabric Softener Dryer Sheet is gentle enough for even the most sensitive skin. Our fabric softener is free of animal products and contains only plant-based ingredients, and recyclable packaging.\n\nThese eco friendly dryer sheets are scientifically formulated with clean ingredients to leave your clothes feeling soft with reduced static cling\n\nOur all dryer sheets have completely plastic free packaging and are powered by plant based ingredients. That means no phosphates, parabens, phthalates, chlorine bleach, artificial dyes, petroleum, ammonia!",
+			price: 14.99,
+			images: ["https://i.ibb.co/bJW8P1Q/cleancole.png"],
+			categories: ["cleaning", "laundry"],
+		},
+	});
+	const airNex = await prisma.article.upsert({
+		where: {
+			slug: "airnex",
+		},
+		update: {},
+		create: {
+			slug: "airnex",
+			title:
+				"AIRNEX Biodegradable Natural Kitchen Sponge - Compostable Cellulose and Coconut Walnut Scrubber Sponge - Eco Friendly Sponges for Dishes (12 Pack)",
+			description:
+				"🍃NATURAL SPONGES FOR DISHES - Airnex's sponges are made with biodegradable white cellulose and scrubbers containing coconut fiber. These plant-based kitchen sponges are a sure way to green-up your kitchen!\n\n🍃THE HEALTHIER WAY OF CLEANING DISHES - Our natural dish sponge can last long without being stinky! Unlike its plastic counterpart, it has porous structure helps it dry up quickly, lessening the chances for illness-causing compounds to breed.\n\n🍃ERGONOMIC SHAPE - Rectangular dishwashing sponges can be a hassle or tiring for you to hold, so we designed this eco friendly dish sponge with a unique S shape for easier use. Lesser risk of straining your hands while cleaning!",
+			price: 14.99,
+			images: ["https://i.ibb.co/cQdRVJf/91x5d21-YKJL-AC-SL1500.jpg"],
+			categories: ["cleaning", "kitchen"],
+		},
+	});
+	const toilet = await prisma.article.upsert({
+		where: {
+			slug: "toilet",
+		},
+		update: {},
+		create: {
+			slug: "toilet",
+			title:
+				"Eco Friendly Toilet Cleaner Sheets - Binbata 60 Strips Disposable Quick Foaming Toilet Cleaner Strips, Efficiently Remove Stains & Odors with Ocean Dew Scent, Plastic Free Biodegradable Septic Safe",
+			description:
+				"-【𝐏𝐎𝐖𝐄𝐑𝐅𝐔𝐋 𝐃𝐄𝐂𝐎𝐍𝐓𝐀𝐌𝐈𝐍𝐀𝐓𝐈𝐎𝐍】Binbata quick foaming toilet cleaner strips with highly efficient active ingredients, the dense foam effectively decomposes stubborn stains such as urine, fecal, and grease stains attached to the toilet surface, forms a long-lasting protective layer after cleaning, prevents dirt and keeps your toilet bright and clean.\n\n- 【𝐎𝐂𝐄𝐀𝐍 𝐃𝐄𝐖 𝐒𝐂𝐄𝐍𝐓】Our liquidless toilet cleaner sheets release the natural ocean dew scent, make the toilet clean and fresh, unlike artificial perfume with pungent smell.\n\n- 【𝐍𝐄𝐔𝐓𝐑𝐀𝐋 & 𝐆𝐄𝐍𝐓𝐋𝐄 𝐇𝐀𝐑𝐌𝐋𝐄𝐒𝐒 𝐈𝐍𝐆𝐑𝐄𝐃𝐈𝐄𝐍𝐓𝐒】The ingredients of our septic safe toilet bowl cleaner sheets are safe, mild and non-irritating. It does not contain any bleach, chlorine or harsh chemicals, scientific descaling without hurting the glaze, so you can use it with confidence.",
+			price: 15.99,
+			images: ["https://i.ibb.co/HYGMD2T/Group-21.png"],
+		},
+	});
+	const swedish = await prisma.article.upsert({
+		where: {
+			slug: "swedish",
+		},
+		update: {},
+		create: {
+			slug: "swedish",
+			title:
+				"Swedish Dishcloths for Kitchen Dishes, 8 Pack Reusable Cleaning Cloths Replace Paper Towels Swedish Towels Cleaning Rags Eco Friendly Biodegradable for Home Office Wipes",
+			description:
+				"Swedish Dish Cloths Set: Swedish Kitchen dish cloths include 8 colorful patterns, which are printed for distinguish various use and matching home décor. Each of kitchen towels is 20 x 18 cm/ 8 x 7 inches, maximize drawer space and use this to wipe our counters stove, clean up house spills and easy to throw in washing machine for quick disinfecting.",
+			price: 12.99,
+			images: ["https://i.ibb.co/x7Fckbm/81-F20rnz-UZL-AC-SL1500.jpg"],
+		},
+	});
+	console.log({ toothbrush, spoons, cleanPeople, airNex, toilet, swedish });
 }
 main()
 	.then(async () => {

@@ -58,7 +58,7 @@ export default function Home() {
 						{data.articles.map((article: article) => (
 							<ArticleCard
 								key={article.id}
-								title={article.title}
+								title={article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")}
 								imagePath={article.images[0]}
 								rating={4.5}
 								priceCad={Number(article.price).toFixed(2)}
