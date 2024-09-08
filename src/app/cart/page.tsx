@@ -3,7 +3,12 @@ import { Box, Button, Card, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../lib/hooks";
-import { selectCart, removeFromCart } from "../lib/features/cartSlice";
+import {
+	selectCart,
+	removeFromCart,
+	removeAllFromCart,
+	addToCart,
+} from "../lib/features/cartSlice";
 import useGetSWR from "../lib/useGetSWR";
 import Loader from "../components/loader";
 import ErrorCard from "../components/errorcard";
@@ -14,12 +19,16 @@ function Article({
 	quantity,
 	imageUrl,
 	removeOnClick,
+	increaseOnClick,
+	decreaseOnClick,
 }: {
 	title: string;
 	price: number;
 	quantity: number;
 	imageUrl: string;
 	removeOnClick: () => void;
+	increaseOnClick: () => void;
+	decreaseOnClick: () => void;
 }) {
 	return (
 		<Card sx={{ p: 2, mb: 2 }}>
@@ -32,10 +41,10 @@ function Article({
 
 						<Box sx={{ display: "flex", gap: 2 }}>
 							<Typography variant='subtitle1'>Quantity: {quantity}</Typography>
-							<Button variant='outlined' size='small'>
+							<Button onClick={decreaseOnClick} variant='outlined' size='small'>
 								-
 							</Button>
-							<Button variant='outlined' size='small'>
+							<Button onClick={increaseOnClick} variant='outlined' size='small'>
 								+
 							</Button>
 						</Box>
@@ -98,8 +107,14 @@ export default function Cart() {
 									quantity={article.qty}
 									imageUrl={dataArticle?.images[0] ?? ""}
 									removeOnClick={() => {
-										dispatch(removeFromCart(article.slug));
+										dispatch(removeAllFromCart(article.slug));
 										toast.success("Item removed from cart");
+									}}
+									increaseOnClick={() => {
+										dispatch(addToCart(article.slug));
+									}}
+									decreaseOnClick={() => {
+										dispatch(removeFromCart(article.slug));
 									}}
 								/>
 							);

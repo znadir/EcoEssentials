@@ -17,19 +17,30 @@ const cartSlice = createSlice({
 	name: "cart",
 	initialState,
 	reducers: {
-		addToCart(state, action: PayloadAction<Article>) {
-			const existingArticle = state.articles.find(
-				(article) => article.slug === action.payload.slug
-			);
+		addToCart(state, action: PayloadAction<string>) {
+			const existingArticle = state.articles.find((article) => article.slug === action.payload);
 			if (existingArticle) {
-				existingArticle.qty += action.payload.qty;
+				existingArticle.qty += 1;
 			} else {
-				state.articles.push(action.payload);
+				state.articles.push({ slug: action.payload, qty: 1 });
 			}
 
 			state.qty = calculateQty(state.articles);
 		},
 		removeFromCart(state, action: PayloadAction<string>) {
+			const existingArticle = state.articles.find((article) => article.slug === action.payload);
+
+			if (existingArticle) {
+				existingArticle.qty -= 1;
+
+				if (existingArticle.qty <= 0) {
+					state.articles = state.articles.filter((article) => article.slug !== action.payload);
+				}
+			}
+
+			state.qty = calculateQty(state.articles);
+		},
+		removeAllFromCart(state, action: PayloadAction<string>) {
 			state.articles = state.articles.filter((article) => article.slug !== action.payload);
 
 			state.qty = calculateQty(state.articles);
@@ -40,7 +51,7 @@ const cartSlice = createSlice({
 	},
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, removeAllFromCart } = cartSlice.actions;
 export const { selectCart } = cartSlice.selectors;
 export default cartSlice.reducer;
 

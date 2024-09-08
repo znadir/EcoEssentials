@@ -104,7 +104,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 						</Typography>
 						<Button
 							onClick={() => {
-								dispatch(addToCart({ slug: data.article.slug, qty: 1 }));
+								dispatch(addToCart(data.article.slug));
 								toast.success("Item added to cart");
 							}}
 							startIcon={<AddShoppingCartIcon />}
