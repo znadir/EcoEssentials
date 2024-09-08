@@ -6,7 +6,6 @@ import ArticleCard from "./components/articlecard";
 import useGetSWR from "./lib/useGetSWR";
 import Loader from "./components/loader";
 import ErrorCard from "./components/errorcard";
-import type { article } from "@prisma/client";
 
 export default function Home() {
 	const { data, isLoading, error } = useGetSWR("/api/articles");
@@ -47,7 +46,7 @@ export default function Home() {
 						sx={{
 							display: "grid",
 							gridTemplateColumns: {
-								xs: "repeat(2, 1fr)",
+								xs: "repeat(1, 1fr)",
 								sm: "repeat(3, 1fr)",
 								md: "repeat(4, 1fr)",
 								lg: "repeat(6, 1fr)",

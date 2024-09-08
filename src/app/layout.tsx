@@ -7,6 +7,7 @@ import theme from "../theme";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
 import { Box } from "@mui/material";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,22 +22,24 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
-			<body className={inter.className}>
-				<Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-					<nav>
-						<NavBar />
-					</nav>
+		<StoreProvider>
+			<html lang='en'>
+				<body className={inter.className}>
+					<Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+						<nav>
+							<NavBar />
+						</nav>
 
-					<AppRouterCacheProvider options={{ key: "css" }}>
-						<ThemeProvider theme={theme}>{children}</ThemeProvider>
-					</AppRouterCacheProvider>
+						<AppRouterCacheProvider options={{ key: "css" }}>
+							<ThemeProvider theme={theme}>{children}</ThemeProvider>
+						</AppRouterCacheProvider>
 
-					<Box sx={{ flex: 1 }} />
+						<Box sx={{ flex: 1 }} />
 
-					<Footer />
-				</Box>
-			</body>
-		</html>
+						<Footer />
+					</Box>
+				</body>
+			</html>
+		</StoreProvider>
 	);
 }

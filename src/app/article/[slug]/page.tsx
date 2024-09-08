@@ -17,6 +17,9 @@ import useGetSWR from "../../lib/useGetSWR";
 import Loader from "@/app/components/loader";
 import ErrorCard from "@/app/components/errorcard";
 
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
+import { addToCart, selectCart } from "@/app/lib/features/cartSlice";
+
 const labels: { [index: string]: string } = {
 	0: "NotRated",
 	0.5: "Useless",
@@ -54,6 +57,9 @@ function Review({
 export default function Article({ params }: { params: { slug: string } }) {
 	const { data, isLoading, error } = useGetSWR(`/api/articles/${params.slug}`);
 
+	const dispatch = useAppDispatch();
+	const cart = useAppSelector(selectCart);
+
 	return isLoading ? (
 		<Loader />
 	) : error ? (
@@ -74,7 +80,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 					sx={{
 						display: "flex",
 						gap: { xs: 2, md: 5 },
-						flexDirection: { xs: "column", md: "row" },
+						flexDirection: { xs: "column", sm: "row" },
 						mt: 2,
 					}}
 				>
@@ -97,7 +103,14 @@ export default function Article({ params }: { params: { slug: string } }) {
 						<Typography variant='h5' sx={{ mb: 2 }} color='success'>
 							<EnergySavingsLeafIcon /> CA${Number(data.article.price).toFixed(2)}
 						</Typography>
-						<Button startIcon={<AddShoppingCartIcon />} variant='contained'>
+						<Button
+							onClick={() => {
+								dispatch(addToCart({ slug: data.article.slug, qty: 1 }));
+								console.log(cart);
+							}}
+							startIcon={<AddShoppingCartIcon />}
+							variant='contained'
+						>
 							Add to cart
 						</Button>
 
