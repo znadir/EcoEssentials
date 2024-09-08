@@ -12,6 +12,7 @@ import {
 import useGetSWR from "../lib/useGetSWR";
 import Loader from "../components/loader";
 import ErrorCard from "../components/errorcard";
+import { useRouter } from "next/navigation";
 
 function Article({
 	title,
@@ -64,6 +65,7 @@ function Article({
 export default function Cart() {
 	const dispatch = useAppDispatch();
 	const cart = useAppSelector(selectCart);
+	const router = useRouter();
 
 	const { data, isLoading, error } = useGetSWR(
 		"/api/articles?slugs=" + cart.articles.map((article) => article.slug).join(",")
@@ -92,6 +94,21 @@ export default function Cart() {
 						<Typography variant='h5' component='div' sx={{ mb: 2 }}>
 							My Cart
 						</Typography>
+						{cart.articles.length === 0 && (
+							<Card sx={{ p: 2 }}>
+								<Typography variant='h6'>Your cart is empty 😢</Typography>
+
+								<Button
+									onClick={() => router.push("/")}
+									variant='contained'
+									color='primary'
+									fullWidth
+									sx={{ mt: 2 }}
+								>
+									Shop Now
+								</Button>
+							</Card>
+						)}
 						{cart.articles.map((article) => {
 							const dataArticle = data?.articles.find((a: any) => a.slug === article.slug);
 
@@ -129,6 +146,7 @@ export default function Cart() {
 							variant='contained'
 							color='success'
 							fullWidth
+							disabled={cart.articles.length === 0}
 						>
 							Proceed to Checkout
 						</Button>
