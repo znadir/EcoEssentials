@@ -18,7 +18,7 @@ import Loader from "@/app/components/loader";
 import ErrorCard from "@/app/components/errorcard";
 import { useAppDispatch } from "@/app/lib/hooks";
 import { addToCart } from "@/app/lib/features/cartSlice";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const labels: { [index: string]: string } = {
 	0: "NotRated",
@@ -58,6 +58,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 	const { data, isLoading, error } = useGetSWR(`/api/articles/${params.slug}`);
 
 	const dispatch = useAppDispatch();
+	const router = useRouter();
 
 	return isLoading ? (
 		<Loader />
@@ -105,7 +106,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 						<Button
 							onClick={() => {
 								dispatch(addToCart(data.article.slug));
-								toast.success("Item added to cart");
+								router.push("/cart");
 							}}
 							startIcon={<AddShoppingCartIcon />}
 							variant='contained'

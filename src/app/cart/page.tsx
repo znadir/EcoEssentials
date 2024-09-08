@@ -13,6 +13,7 @@ import useGetSWR from "../lib/useGetSWR";
 import Loader from "../components/loader";
 import ErrorCard from "../components/errorcard";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function Article({
 	title,
@@ -71,6 +72,19 @@ export default function Cart() {
 		"/api/articles?slugs=" + cart.articles.map((article) => article.slug).join(",")
 	);
 
+	const [totalPrice, setTotalPrice] = useState(0);
+
+	useEffect(() => {
+		setTotalPrice(
+			cart.articles.reduce(
+				(acc, article) =>
+					acc +
+					(data?.articles.find((a: any) => a.slug === article.slug)?.price ?? 0) * article.qty,
+				0
+			)
+		);
+	}, [cart]);
+
 	return isLoading ? (
 		<Loader />
 	) : error ? (
@@ -125,7 +139,6 @@ export default function Cart() {
 									imageUrl={dataArticle?.images[0] ?? ""}
 									removeOnClick={() => {
 										dispatch(removeAllFromCart(article.slug));
-										toast.success("Item removed from cart");
 									}}
 									increaseOnClick={() => {
 										dispatch(addToCart(article.slug));
@@ -139,7 +152,7 @@ export default function Cart() {
 					</Box>
 					<Card sx={{ p: 3, flex: 2, height: "fit-content" }}>
 						<Typography variant='h6' sx={{ mb: 2 }}>
-							Subtotal ({cart.qty} item{cart.qty > 1 ? "s" : ""}): $10.02
+							Subtotal ({cart.qty} item{cart.qty > 1 ? "s" : ""}): ${totalPrice.toFixed(2)}
 						</Typography>
 						<Button
 							onClick={() => toast.error("Sorry! This is just a demo 😔")}
