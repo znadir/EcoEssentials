@@ -41,7 +41,7 @@ export default function RootLayout({
 
 						<Footer />
 					</Box>
-					<ToastContainer />
+					<ToastContainer position='top-center' />
 				</body>
 			</html>
 		</StoreProvider>

@@ -1,6 +1,12 @@
 "use client";
 import { Box, Button, Card, Container, Typography } from "@mui/material";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import { useAppSelector } from "../lib/hooks";
+import { selectCart } from "../lib/features/cartSlice";
+import useGetSWR from "../lib/useGetSWR";
+import Loader from "../components/loader";
+import ErrorCard from "../components/errorcard";
 
 function Article({
 	title,
@@ -45,7 +51,17 @@ function Article({
 }
 
 export default function Cart() {
-	return (
+	const cart = useAppSelector(selectCart);
+
+	const { data, isLoading, error } = useGetSWR(
+		"/api/articles?slugs=" + cart.articles.map((article) => article.slug).join(",")
+	);
+
+	return isLoading ? (
+		<Loader />
+	) : error ? (
+		<ErrorCard />
+	) : (
 		<main>
 			<Container
 				maxWidth='xl'
@@ -64,26 +80,34 @@ export default function Cart() {
 						<Typography variant='h5' component='div' sx={{ mb: 2 }}>
 							My Cart
 						</Typography>
-						<Article
-							title='Eco-Friendly Placeholder'
-							price={10.02}
-							quantity={1}
-							imageUrl='/articles/placeholder.png'
-						/>
+						{cart.articles.map((article) => {
+							const dataArticle = data?.articles.find((a: any) => a.slug === article.slug);
 
-						<Article
-							title='Eco-Friendly Placeholder'
-							price={10.02}
-							quantity={1}
-							imageUrl='/articles/placeholder.png'
-						/>
+							const fixedTitle =
+								dataArticle?.title.substring(0, 70) +
+									(dataArticle?.title.length > 70 ? "..." : "") || "Unknown";
+
+							return (
+								<Article
+									key={article.slug}
+									title={fixedTitle}
+									price={dataArticle?.price ?? 0}
+									quantity={article.qty}
+									imageUrl={dataArticle?.images[0] ?? ""}
+								/>
+							);
+						})}
 					</Box>
 					<Card sx={{ p: 3, flex: 2, height: "fit-content" }}>
 						<Typography variant='h6' sx={{ mb: 2 }}>
-							Subtotal (1 item): $10.02
+							Subtotal ({cart.qty} item{cart.qty > 1 ? "s" : ""}): $10.02
 						</Typography>
 						<Button
-							onClick={() => alert("Sorry! This is not a real store.")}
+							onClick={() =>
+								toast.error("Sorry! This is just a demo 😔", {
+									theme: "colored",
+								})
+							}
 							variant='contained'
 							color='success'
 							fullWidth

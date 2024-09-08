@@ -7,8 +7,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import { useAppSelector } from "@/app/lib/hooks";
 import { selectCart } from "../lib/features/cartSlice";
 
@@ -23,19 +22,6 @@ export default function NavBar() {
 	};
 
 	const cart = useAppSelector(selectCart);
-	const [cartCount, setCartCount] = useState(0);
-
-	useEffect(() => {
-		if (!cart) return;
-
-		let qty = 0;
-
-		cart.forEach((item) => {
-			qty += item.qty;
-		});
-
-		setCartCount(qty);
-	}, [cart]);
 
 	return (
 		<>
@@ -124,7 +110,7 @@ export default function NavBar() {
 								</Button>
 							</Link>
 
-							<Badge badgeContent={cartCount} color='primary'>
+							<Badge badgeContent={cart.qty} color='primary'>
 								<Link href='/cart'>
 									<Button
 										variant='contained'

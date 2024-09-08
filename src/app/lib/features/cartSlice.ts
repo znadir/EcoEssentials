@@ -7,10 +7,11 @@ interface Article {
 }
 
 interface CartState {
+	qty: number;
 	articles: Article[];
 }
 
-const initialState: CartState = { articles: [] };
+const initialState: CartState = { qty: 0, articles: [] };
 
 const cartSlice = createSlice({
 	name: "cart",
@@ -25,16 +26,29 @@ const cartSlice = createSlice({
 			} else {
 				state.articles.push(action.payload);
 			}
+
+			state.qty = calculateQty(state.articles);
 		},
 		removeFromCart(state, action: PayloadAction<string>) {
 			state.articles = state.articles.filter((article) => article.slug !== action.payload);
+
+			state.qty = calculateQty(state.articles);
 		},
 	},
 	selectors: {
-		selectCart: (cart: CartState) => cart.articles,
+		selectCart: (cart: CartState) => cart,
 	},
 });
 
 export const { addToCart, removeFromCart } = cartSlice.actions;
 export const { selectCart } = cartSlice.selectors;
 export default cartSlice.reducer;
+
+// ===== Utils =====
+function calculateQty(articles: Article[]) {
+	let qty = 0;
+	articles.forEach((article) => {
+		qty += article.qty;
+	});
+	return qty;
+}

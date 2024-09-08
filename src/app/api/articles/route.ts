@@ -8,6 +8,7 @@ export const GET = tryCatch(async (request: NextRequest) => {
 	const category = searchParams.get("category");
 	const minPrice = searchParams.get("minPrice");
 	const maxPrice = searchParams.get("maxPrice");
+	const slugs = searchParams.get("slugs");
 
 	const categories = category ? category.split(",") : null;
 
@@ -17,6 +18,14 @@ export const GET = tryCatch(async (request: NextRequest) => {
 		whereConditions.push({
 			categories: {
 				hasSome: categories,
+			},
+		});
+	}
+
+	if (slugs) {
+		whereConditions.push({
+			slug: {
+				in: slugs.split(","),
 			},
 		});
 	}
