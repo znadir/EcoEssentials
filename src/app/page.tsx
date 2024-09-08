@@ -18,7 +18,7 @@ export default function Home() {
 					<Image
 						style={{ width: "100%", height: "100%" }}
 						src='/deskbanner.png'
-						alt='Buy Eco-friendly products'
+						alt='Buy Eco-Friendly products'
 						width={1427}
 						height={235}
 					/>

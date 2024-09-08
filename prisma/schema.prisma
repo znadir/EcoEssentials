@@ -29,6 +29,7 @@ model article {
 
 model review {
   id        String   @id @unique @default(cuid())
+  username  String
   comment   String
   stars     Int
   article   article? @relation(fields: [articleId], references: [id])
