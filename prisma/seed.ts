@@ -161,11 +161,10 @@ async function main() {
 	];
 
 	for (const article of articles) {
-		const { reviews, ...data } = article;
 		const articleUpserted = await prisma.article.upsert({
-			where: { slug: data.slug },
-			update: data,
-			create: data,
+			where: { slug: article.slug },
+			update: article,
+			create: article,
 		});
 
 		console.log({ articleUpserted });
