@@ -129,21 +129,14 @@ export default function Article({ params }: { params: { slug: string } }) {
 						gap: 2,
 					}}
 				>
-					<Review
-						nom='John Doe'
-						rating={4}
-						commentaire='This product is great! I love it. I will definitely buy it again.'
-					/>
-					<Review
-						nom='Jane Doe'
-						rating={5}
-						commentaire='I love this product! It is amazing. I will definitely buy it again.'
-					/>
-					<Review
-						nom='Alice Doe'
-						rating={3}
-						commentaire='This product is ok. I might buy it again.'
-					/>
+					{data.article.reviews.map((review: any) => (
+						<Review
+							key={review.id}
+							nom={review.username}
+							rating={review.stars}
+							commentaire={review.comment}
+						/>
+					))}
 				</Box>
 			</Container>
 		</main>
