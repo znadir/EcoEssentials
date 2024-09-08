@@ -11,6 +11,7 @@
 		"prisma-seed": "npx prisma db push && npx prisma db seed",
 		"prisma-studio": "npx prisma studio",
 		"prisma-generate": "npx prisma generate",
+		"prisma-reset": "npx prisma migrate reset --force",
 		"test": "jest"
 	},
 	"dependencies": {
