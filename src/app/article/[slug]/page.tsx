@@ -105,7 +105,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 						<Button
 							onClick={() => {
 								dispatch(addToCart({ slug: data.article.slug, qty: 1 }));
-								toast.success("Item added to cart");
+								toast.success("Item added to cart", { theme: "colored" });
 							}}
 							startIcon={<AddShoppingCartIcon />}
 							variant='contained'
