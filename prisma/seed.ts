@@ -3,12 +3,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-	const toothbrush = await prisma.article.upsert({
-		where: {
-			slug: "bio-toothbrush",
-		},
-		update: {},
-		create: {
+	const articles = [
+		{
 			slug: "bio-toothbrush",
 			title:
 				"Biodegradable Eco-Friendly Natural Bamboo Charcoal Toothbrushes, FSC Certified and PETA Approved - 12 Count ",
@@ -37,13 +33,7 @@ async function main() {
 				],
 			},
 		},
-	});
-	const spoons = await prisma.article.upsert({
-		where: {
-			slug: "compostable-spoons",
-		},
-		update: {},
-		create: {
+		{
 			slug: "compostable-spoons",
 			title:
 				"100% Compostable Spoons - 500 Large Disposable Utensils (6.5 in.) Bulk Size Eco Friendly Durable and Heat Resistant Alternative to Plastic Spoons with Convenient Tray",
@@ -73,13 +63,7 @@ async function main() {
 				],
 			},
 		},
-	});
-	const cleanPeople = await prisma.article.upsert({
-		where: {
-			slug: "clean-people",
-		},
-		update: {},
-		create: {
+		{
 			slug: "clean-people",
 			title:
 				"The Clean People Fabric Softener Sheets - Dryer Sheets - Softens & Removes Static Cling - Vegan Laundry Softener With Essential Oils - Fresh Scent, 120 Pack ",
@@ -108,13 +92,7 @@ async function main() {
 				],
 			},
 		},
-	});
-	const airNex = await prisma.article.upsert({
-		where: {
-			slug: "airnex",
-		},
-		update: {},
-		create: {
+		{
 			slug: "airnex",
 			title:
 				"AIRNEX Biodegradable Natural Kitchen Sponge - Compostable Cellulose and Coconut Walnut Scrubber Sponge - Eco Friendly Sponges for Dishes (12 Pack)",
@@ -143,13 +121,7 @@ async function main() {
 				],
 			},
 		},
-	});
-	const toilet = await prisma.article.upsert({
-		where: {
-			slug: "toilet",
-		},
-		update: {},
-		create: {
+		{
 			slug: "toilet",
 			title:
 				"Eco Friendly Toilet Cleaner Sheets - Binbata 60 Strips Disposable Quick Foaming Toilet Cleaner Strips, Efficiently Remove Stains & Odors with Ocean Dew Scent, Plastic Free Biodegradable Septic Safe",
@@ -177,13 +149,7 @@ async function main() {
 				],
 			},
 		},
-	});
-	const swedish = await prisma.article.upsert({
-		where: {
-			slug: "swedish",
-		},
-		update: {},
-		create: {
+		{
 			slug: "swedish",
 			title:
 				"Swedish Dishcloths for Kitchen Dishes, 8 Pack Reusable Cleaning Cloths Replace Paper Towels Swedish Towels Cleaning Rags Eco Friendly Biodegradable for Home Office Wipes",
@@ -192,8 +158,18 @@ async function main() {
 			price: 12.99,
 			images: ["/articles/swedish-paper.jpg"],
 		},
-	});
-	console.log({ toothbrush, spoons, cleanPeople, airNex, toilet, swedish });
+	];
+
+	for (const article of articles) {
+		const { reviews, ...data } = article;
+		const articleUpserted = await prisma.article.upsert({
+			where: { slug: data.slug },
+			update: data,
+			create: data,
+		});
+
+		console.log({ articleUpserted });
+	}
 }
 main()
 	.then(async () => {
