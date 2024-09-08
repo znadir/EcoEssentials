@@ -1,8 +1,8 @@
 # Eco Essentials Online Shop
 
-Eco Essentials is a fictional online shop dedicated to eco-friendly products, built using Next.js and Material Design.
+Eco Essentials is a fictional online shop dedicated to eco-friendly products, built using Next.js, MUI, Prisma and Redux.
 
-![image](https://github.com/user-attachments/assets/57093530-e37e-4427-9778-c37190799746)
+![image](https://github.com/user-attachments/assets/208eb761-fd15-46e2-b27c-18b80bba9309)
 
 ## Commands
 
