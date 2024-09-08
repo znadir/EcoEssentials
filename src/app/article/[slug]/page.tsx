@@ -16,9 +16,9 @@ import EnergySavingsLeafIcon from "@mui/icons-material/EnergySavingsLeaf";
 import useGetSWR from "../../lib/useGetSWR";
 import Loader from "@/app/components/loader";
 import ErrorCard from "@/app/components/errorcard";
-
-import { useAppDispatch, useAppSelector } from "@/app/lib/hooks";
-import { addToCart, selectCart } from "@/app/lib/features/cartSlice";
+import { useAppDispatch } from "@/app/lib/hooks";
+import { addToCart } from "@/app/lib/features/cartSlice";
+import { toast } from "react-toastify";
 
 const labels: { [index: string]: string } = {
 	0: "NotRated",
@@ -58,7 +58,6 @@ export default function Article({ params }: { params: { slug: string } }) {
 	const { data, isLoading, error } = useGetSWR(`/api/articles/${params.slug}`);
 
 	const dispatch = useAppDispatch();
-	const cart = useAppSelector(selectCart);
 
 	return isLoading ? (
 		<Loader />
@@ -106,7 +105,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 						<Button
 							onClick={() => {
 								dispatch(addToCart({ slug: data.article.slug, qty: 1 }));
-								console.log(cart);
+								toast.success("Item added to cart");
 							}}
 							startIcon={<AddShoppingCartIcon />}
 							variant='contained'

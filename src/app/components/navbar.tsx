@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { AppBar, Box, Button, Container, IconButton, InputBase, Paper } from "@mui/material";
+import { AppBar, Box, Button, Container, IconButton, InputBase, Paper, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useAppSelector } from "@/app/lib/hooks";
+import { selectCart } from "../lib/features/cartSlice";
 
 export default function NavBar() {
 	const router = useRouter();
@@ -18,6 +21,21 @@ export default function NavBar() {
 		router.push(`/search?query=${encodeURIComponent(searchText)}`);
 		setSearchText("");
 	};
+
+	const cart = useAppSelector(selectCart);
+	const [cartCount, setCartCount] = useState(0);
+
+	useEffect(() => {
+		if (!cart) return;
+
+		let qty = 0;
+
+		cart.forEach((item) => {
+			qty += item.qty;
+		});
+
+		setCartCount(qty);
+	}, [cart]);
 
 	return (
 		<>
@@ -105,16 +123,19 @@ export default function NavBar() {
 									Login/Sign Up
 								</Button>
 							</Link>
-							<Link href='/cart'>
-								<Button
-									variant='contained'
-									size='medium'
-									color='secondary'
-									startIcon={<ShoppingCartIcon />}
-								>
-									Cart
-								</Button>
-							</Link>
+
+							<Badge badgeContent={cartCount} color='primary'>
+								<Link href='/cart'>
+									<Button
+										variant='contained'
+										size='medium'
+										color='secondary'
+										startIcon={<ShoppingCartIcon />}
+									>
+										Cart
+									</Button>
+								</Link>
+							</Badge>
 						</Box>
 					</Box>
 				</Container>
