@@ -2,8 +2,8 @@
 import { Box, Button, Card, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import { toast } from "react-toastify";
-import { useAppSelector } from "../lib/hooks";
-import { selectCart } from "../lib/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { selectCart, removeFromCart } from "../lib/features/cartSlice";
 import useGetSWR from "../lib/useGetSWR";
 import Loader from "../components/loader";
 import ErrorCard from "../components/errorcard";
@@ -13,11 +13,13 @@ function Article({
 	price,
 	quantity,
 	imageUrl,
+	removeOnClick,
 }: {
 	title: string;
 	price: number;
 	quantity: number;
 	imageUrl: string;
+	removeOnClick: () => void;
 }) {
 	return (
 		<Card sx={{ p: 2, mb: 2 }}>
@@ -38,7 +40,7 @@ function Article({
 							</Button>
 						</Box>
 
-						<Button variant='outlined' size='small' color='error'>
+						<Button onClick={removeOnClick} variant='outlined' size='small' color='error'>
 							Remove
 						</Button>
 					</Box>
@@ -51,6 +53,7 @@ function Article({
 }
 
 export default function Cart() {
+	const dispatch = useAppDispatch();
 	const cart = useAppSelector(selectCart);
 
 	const { data, isLoading, error } = useGetSWR(
@@ -94,6 +97,10 @@ export default function Cart() {
 									price={dataArticle?.price ?? 0}
 									quantity={article.qty}
 									imageUrl={dataArticle?.images[0] ?? ""}
+									removeOnClick={() => {
+										dispatch(removeFromCart(article.slug));
+										toast.success("Item removed from cart");
+									}}
 								/>
 							);
 						})}
@@ -103,11 +110,7 @@ export default function Cart() {
 							Subtotal ({cart.qty} item{cart.qty > 1 ? "s" : ""}): $10.02
 						</Typography>
 						<Button
-							onClick={() =>
-								toast.error("Sorry! This is just a demo 😔", {
-									theme: "colored",
-								})
-							}
+							onClick={() => toast.error("Sorry! This is just a demo 😔")}
 							variant='contained'
 							color='success'
 							fullWidth
