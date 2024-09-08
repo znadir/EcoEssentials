@@ -97,7 +97,7 @@ async function main() {
 					},
 					{
 						username: "Jane Doe",
-						stars: 1,
+						stars: 2,
 						comment: "The fabric softener is not good. It is very hard and it hurts my skin.",
 					},
 					{
@@ -137,7 +137,7 @@ async function main() {
 					},
 					{
 						username: "Alice Doe",
-						stars: 5,
+						stars: 4,
 						comment: "I love this sponge. It is very soft and it cleans my dishes very well.",
 					},
 				],
@@ -166,12 +166,12 @@ async function main() {
 					},
 					{
 						username: "Jane Doe",
-						stars: 1,
+						stars: 0,
 						comment: "The toilet cleaner is not good. It is very hard and it hurts my nose.",
 					},
 					{
 						username: "Alice Doe",
-						stars: 5,
+						stars: 4.5,
 						comment: "I love this toilet cleaner. It is very soft and it smells very well.",
 					},
 				],

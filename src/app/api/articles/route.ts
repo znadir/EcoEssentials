@@ -1,6 +1,7 @@
 import { tryCatch } from "@/app/utils";
 import prisma from "@/app/lib/prisma";
 import { type NextRequest } from "next/server";
+import { getReviewsAvg } from "@/app/api/utils";
 
 export const GET = tryCatch(async (request: NextRequest) => {
 	const searchParams = request.nextUrl.searchParams;
@@ -33,7 +34,18 @@ export const GET = tryCatch(async (request: NextRequest) => {
 		},
 	});
 
+	const articlesWithRating = await Promise.all(
+		articles.map(async (article) => {
+			const rating = await getReviewsAvg(article.id);
+
+			return {
+				...article,
+				rating,
+			};
+		})
+	);
+
 	return Response.json({
-		articles,
+		articles: articlesWithRating,
 	});
 });

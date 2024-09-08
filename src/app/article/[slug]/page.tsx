@@ -18,6 +18,7 @@ import Loader from "@/app/components/loader";
 import ErrorCard from "@/app/components/errorcard";
 
 const labels: { [index: string]: string } = {
+	0: "NotRated",
 	0.5: "Useless",
 	1: "Useless+",
 	1.5: "Poor",
@@ -52,8 +53,6 @@ function Review({
 
 export default function Article({ params }: { params: { slug: string } }) {
 	const { data, isLoading, error } = useGetSWR(`/api/articles/${params.slug}`);
-
-	const rating = 4.5;
 
 	return isLoading ? (
 		<Loader />
@@ -91,8 +90,8 @@ export default function Article({ params }: { params: { slug: string } }) {
 						</Typography>
 
 						<Box sx={{ width: 200, display: "flex", alignItems: "center", mb: 2 }}>
-							<Rating value={rating} precision={0.5} readOnly />
-							<Box sx={{ ml: 2 }}>{labels[rating]}</Box>
+							<Rating value={data.article.rating} precision={0.5} readOnly />
+							<Box sx={{ ml: 2 }}>{labels[data.article.rating]}</Box>
 						</Box>
 
 						<Typography variant='h5' sx={{ mb: 2 }} color='success'>
@@ -116,7 +115,7 @@ export default function Article({ params }: { params: { slug: string } }) {
 				<Typography component='h1' variant='h6' sx={{ mt: 3, mb: 1 }}>
 					Customer reviews
 				</Typography>
-				<Rating size='large' value={rating} precision={0.5} readOnly />
+				<Rating size='large' value={data.article.rating} precision={0.5} readOnly />
 				<Box
 					sx={{
 						display: "grid",

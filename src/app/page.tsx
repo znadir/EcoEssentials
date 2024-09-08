@@ -55,12 +55,12 @@ export default function Home() {
 							gap: 2,
 						}}
 					>
-						{data.articles.map((article: article) => (
+						{data.articles.map((article: any) => (
 							<ArticleCard
 								key={article.id}
 								title={article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")}
 								imagePath={article.images[0]}
-								rating={4.5}
+								rating={article.rating}
 								priceCad={Number(article.price).toFixed(2)}
 								href={`/article/${article.slug}`}
 							/>
