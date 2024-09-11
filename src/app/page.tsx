@@ -1,14 +1,12 @@
-"use client";
-
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
+import prisma from "@/app/lib/prisma";
 import ArticleCard from "./components/articlecard";
-import useGetSWR from "./lib/useGetSWR";
-import Loader from "./components/loader";
-import ErrorCard from "./components/errorcard";
 
-export default function Home() {
-	const { data, isLoading, error } = useGetSWR("/api/articles");
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+	const articles = await prisma.article.findMany({ take: 10 });
 
 	return (
 		<main>
@@ -37,35 +35,29 @@ export default function Home() {
 					Our Eco Products
 				</Typography>
 
-				{isLoading ? (
-					<Loader />
-				) : error ? (
-					<ErrorCard />
-				) : (
-					<Box
-						sx={{
-							display: "grid",
-							gridTemplateColumns: {
-								xs: "repeat(1, 1fr)",
-								sm: "repeat(3, 1fr)",
-								md: "repeat(4, 1fr)",
-								lg: "repeat(6, 1fr)",
-							},
-							gap: 2,
-						}}
-					>
-						{data.articles.map((article: any) => (
-							<ArticleCard
-								key={article.id}
-								title={article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")}
-								imagePath={article.images[0]}
-								rating={article.rating}
-								priceCad={Number(article.price).toFixed(2)}
-								href={`/article/${article.slug}`}
-							/>
-						))}
-					</Box>
-				)}
+				<Box
+					sx={{
+						display: "grid",
+						gridTemplateColumns: {
+							xs: "repeat(1, 1fr)",
+							sm: "repeat(3, 1fr)",
+							md: "repeat(4, 1fr)",
+							lg: "repeat(6, 1fr)",
+						},
+						gap: 2,
+					}}
+				>
+					{articles.map((article: any) => (
+						<ArticleCard
+							key={article.id}
+							title={article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")}
+							imagePath={article.images[0]}
+							rating={article.rating}
+							priceCad={Number(article.price).toFixed(2)}
+							href={`/article/${article.slug}`}
+						/>
+					))}
+				</Box>
 				<Box
 					sx={{
 						display: "flex",
