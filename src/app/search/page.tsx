@@ -47,7 +47,7 @@ export default function Search() {
 							Filters
 						</Typography>
 
-						<Box>
+						<Box sx={{ display: { xs: "block", md: "none" } }}>
 							<IconButton onClick={() => setShowFilters(!showFilters)}>
 								{showFilters ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 							</IconButton>
