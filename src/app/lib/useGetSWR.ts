@@ -16,11 +16,11 @@ export function getCookie(cname: string) {
 	return null;
 }
 
-export default function useGetSWR(url: string, isApiHost = true) {
-	const { data, error, isLoading } = useSWR(url, async () => {
+export default function useGetSWR(url: any, isApiHost = true) {
+	const { data, error, isLoading } = useSWR(url, async (realUrl: string) => {
 		const token = getCookie("token");
 
-		const response = await fetch(url, {
+		const response = await fetch(realUrl, {
 			method: "GET",
 			headers: {
 				Authorization: "Bearer " + token,

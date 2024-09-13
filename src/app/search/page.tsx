@@ -9,20 +9,45 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
-import ArticleCard from "../components/articlecard";
 import { Suspense, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { useSearchParams } from "next/navigation";
-import useGetSWR from "../lib/useGetSWR";
 import ErrorCard from "../components/errorcard";
 import Loader from "../components/loader";
+import useGetSWR from "../lib/useGetSWR";
+import ArticleCard from "../components/articlecard";
 
-function SearchResults() {
+interface FilterState {
+	fashion: boolean;
+	zeroWaste: boolean;
+	ecoHome: boolean;
+	personalCare: boolean;
+	wellness: boolean;
+	refurbished: boolean;
+	new: boolean;
+}
+
+function SearchResults({
+	maxPrice,
+	minPrice,
+	filterState,
+}: {
+	maxPrice: number;
+	minPrice: number;
+	filterState: FilterState;
+}) {
 	const searchParams = useSearchParams();
 	const query = searchParams.get("query");
 
-	const { data, isLoading, error } = useGetSWR(`/api/articles?query=${query}`);
+	const { data, isLoading, error } = useGetSWR(
+		`/api/articles?query=${query}&minPrice=${minPrice}&maxPrice=${
+			maxPrice || 999999999
+		}&category=${Object.entries(filterState)
+			.filter(([, value]) => value)
+			.map(([key]) => key.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase())
+			.join(",")}`
+	);
 
 	return (
 		<>
@@ -65,6 +90,36 @@ function SearchResults() {
 export default function Search() {
 	const [showFilters, setShowFilters] = useState(false);
 
+	const [filterState, setFilterState] = useState({
+		fashion: false,
+		zeroWaste: false,
+		ecoHome: false,
+		personalCare: false,
+		wellness: false,
+		refurbished: false,
+		new: false,
+	});
+
+	const {
+		fashion,
+		zeroWaste,
+		ecoHome,
+		personalCare,
+		wellness,
+		refurbished,
+		new: isnew,
+	} = filterState;
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setFilterState({
+			...filterState,
+			[event.target.name]: event.target.checked,
+		});
+	};
+
+	const [minPrice, setMinPrice] = useState(0);
+	const [maxPrice, setMaxPrice] = useState(0);
+
 	return (
 		<main>
 			<Container
@@ -99,11 +154,31 @@ export default function Search() {
 						</Typography>
 
 						<FormGroup>
-							<FormControlLabel control={<Checkbox />} label='Fashion' />
-							<FormControlLabel control={<Checkbox />} label='Zero Waste' />
-							<FormControlLabel control={<Checkbox />} label='Eco Home' />
-							<FormControlLabel control={<Checkbox />} label='Personal Care' />
-							<FormControlLabel control={<Checkbox />} label='Wellness' />
+							<FormControlLabel
+								control={<Checkbox checked={fashion} onChange={handleChange} />}
+								label='Fashion'
+								name='fashion'
+							/>
+							<FormControlLabel
+								control={<Checkbox checked={zeroWaste} onChange={handleChange} />}
+								label='Zero Waste'
+								name='zeroWaste'
+							/>
+							<FormControlLabel
+								control={<Checkbox checked={ecoHome} onChange={handleChange} />}
+								label='Eco Home'
+								name='ecoHome'
+							/>
+							<FormControlLabel
+								control={<Checkbox checked={personalCare} onChange={handleChange} />}
+								label='Personal Care'
+								name='personalCare'
+							/>
+							<FormControlLabel
+								control={<Checkbox checked={wellness} onChange={handleChange} />}
+								label='Wellness'
+								name='wellness'
+							/>
 						</FormGroup>
 
 						<Typography
@@ -115,8 +190,24 @@ export default function Search() {
 						</Typography>
 
 						<Box sx={{ display: "flex", gap: 1, mr: 2 }}>
-							<TextField label='Min' type='number' variant='standard' />
-							<TextField label='Max' type='number' variant='standard' />
+							<TextField
+								label='Min'
+								value={minPrice}
+								onChange={(e) =>
+									setMinPrice(Number(e.target.value) > 0 ? Number(e.target.value) : 0)
+								}
+								type='number'
+								variant='standard'
+							/>
+							<TextField
+								label='Max'
+								value={maxPrice}
+								onChange={(e) =>
+									setMaxPrice(Number(e.target.value) > 0 ? Number(e.target.value) : 0)
+								}
+								type='number'
+								variant='standard'
+							/>
 						</Box>
 
 						<Typography
@@ -128,14 +219,22 @@ export default function Search() {
 						</Typography>
 
 						<FormGroup>
-							<FormControlLabel control={<Checkbox />} label='Refurbished' />
-							<FormControlLabel control={<Checkbox />} label='New' />
+							<FormControlLabel
+								control={<Checkbox checked={refurbished} onChange={handleChange} />}
+								name='refurbished'
+								label='Refurbished'
+							/>
+							<FormControlLabel
+								control={<Checkbox checked={isnew} onChange={handleChange} />}
+								name='new'
+								label='New'
+							/>
 						</FormGroup>
 					</Box>
 				</Box>
 				<Box sx={{ flex: 1 }}>
 					<Suspense>
-						<SearchResults />
+						<SearchResults maxPrice={maxPrice} minPrice={minPrice} filterState={filterState} />
 					</Suspense>
 				</Box>
 			</Container>
