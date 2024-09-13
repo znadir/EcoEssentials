@@ -41,10 +41,10 @@ export default function NavBar() {
 							</Link>
 
 							<Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-								<IconButton>
+								<IconButton onClick={() => router.push("/login")}>
 									<AccountCircleIcon />
 								</IconButton>
-								<IconButton>
+								<IconButton onClick={() => router.push("/cart")}>
 									<ShoppingCartIcon />
 								</IconButton>
 							</Box>
@@ -52,6 +52,7 @@ export default function NavBar() {
 
 						<Paper
 							component='form'
+							onSubmit={handleSubmit}
 							sx={{
 								p: "0px 4px",
 								display: "flex",
@@ -60,8 +61,13 @@ export default function NavBar() {
 								borderRadius: 2,
 							}}
 						>
-							<InputBase sx={{ ml: 1, flex: 1 }} placeholder='Search Eco Essentials' />
-							<IconButton type='button' sx={{ p: "10px" }} aria-label='search'>
+							<InputBase
+								sx={{ ml: 1, flex: 1 }}
+								value={searchText}
+								onChange={(e) => setSearchText(e.target.value)}
+								placeholder='Search Eco Essentials'
+							/>
+							<IconButton type='submit' sx={{ p: "10px" }} aria-label='search'>
 								<SearchIcon />
 							</IconButton>
 						</Paper>
