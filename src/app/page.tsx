@@ -2,11 +2,18 @@ import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import prisma from "@/app/lib/prisma";
 import ArticleCard from "./components/articlecard";
+import { getReviewsAvg } from "@/app/api/utils";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-	const articles = await prisma.article.findMany({ take: 10 });
+	const articlesWithoutReviews = await prisma.article.findMany({ take: 10 });
+	const articles = await Promise.all(
+		articlesWithoutReviews.map(async (article) => {
+			const rating = await getReviewsAvg(article.id);
+			return { ...article, rating };
+		})
+	);
 
 	return (
 		<main>
