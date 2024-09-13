@@ -14,17 +14,17 @@ import { Suspense, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { useSearchParams } from "next/navigation";
-
-function Query() {
-	const searchParams = useSearchParams();
-
-	const query = searchParams.get("query");
-
-	return <>{query}</>;
-}
+import useGetSWR from "../lib/useGetSWR";
+import ErrorCard from "../components/errorcard";
+import Loader from "../components/loader";
 
 export default function Search() {
 	const [showFilters, setShowFilters] = useState(false);
+
+	const searchParams = useSearchParams();
+	const query = searchParams.get("query");
+
+	const { data, isLoading, error } = useGetSWR(`/api/articles?query=${query}`);
 
 	return (
 		<main>
@@ -39,7 +39,7 @@ export default function Search() {
 			>
 				<Box
 					sx={{
-						width: { xs: "100%", md: "470px" },
+						width: { xs: "100%", md: "251px" },
 					}}
 				>
 					<Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -54,7 +54,7 @@ export default function Search() {
 						</Box>
 					</Box>
 
-					<Box sx={{ display: { xs: showFilters ? "block" : "none", md: "block" } }}>
+					<Box sx={{ display: { xs: showFilters ? "block" : "none", md: "block", width: "100%" } }}>
 						<Typography variant='subtitle1' component='div' sx={{ mb: 1, fontWeight: "medium" }}>
 							Categories
 						</Typography>
@@ -94,63 +94,43 @@ export default function Search() {
 						</FormGroup>
 					</Box>
 				</Box>
-				<Box>
+				<Box sx={{ flex: 1 }}>
 					<Typography variant='h5' component='h2' sx={{ mb: 2 }}>
-						Search for :{" "}
-						<Suspense>
-							<Query />
-						</Suspense>
+						Search for : <Suspense>{query}</Suspense>
 					</Typography>
-					<Box
-						sx={{
-							display: "grid",
-							gridTemplateColumns: {
-								xs: "repeat(2, 1fr)",
-								sm: "repeat(3, 1fr)",
-								md: "repeat(4, 1fr)",
-								lg: "repeat(6, 1fr)",
-							},
-							gap: 3,
-						}}
-					>
-						<ArticleCard
-							title='Ecozone Rinse Aid, Natural Rinsing Aid for Dishwashers, Dry & Shine'
-							imagePath='/articles/1.png'
-							rating={4.5}
-							priceCad={7.99}
-						/>
-						<ArticleCard
-							title='EcoSlurps Bamboo Cotton Swabs - Tree Planted with Sale '
-							imagePath='/articles/2.png'
-							rating={4.5}
-							priceCad={12.99}
-						/>
-						<ArticleCard
-							title='10 Pcs Bamboo Toothbrush, BPA Free Soft Bristle Toothbrush'
-							imagePath='/articles/3.png'
-							rating={4.5}
-							priceCad={11.99}
-						/>
-						<ArticleCard
-							title='Eco-Friendly Placeholder'
-							imagePath='/articles/placeholder.png'
-							rating={4.5}
-							priceCad={10.99}
-						/>
-
-						<ArticleCard
-							title='Eco-Friendly Placeholder'
-							imagePath='/articles/placeholder.png'
-							rating={4.5}
-							priceCad={10.99}
-						/>
-						<ArticleCard
-							title='Eco-Friendly Placeholder'
-							imagePath='/articles/placeholder.png'
-							rating={4.5}
-							priceCad={10.99}
-						/>
-					</Box>
+					{isLoading ? (
+						<Loader />
+					) : error ? (
+						<ErrorCard />
+					) : (
+						<>
+							<Box
+								sx={{
+									display: "grid",
+									gridTemplateColumns: {
+										xs: "repeat(2, 1fr)",
+										sm: "repeat(3, 1fr)",
+										md: "repeat(4, 1fr)",
+										lg: "repeat(6, 1fr)",
+									},
+									gap: 3,
+								}}
+							>
+								{data.articles.map((article: any) => (
+									<ArticleCard
+										key={article.id}
+										title={
+											article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")
+										}
+										imagePath={article.images[0]}
+										rating={article.rating}
+										priceCad={Number(article.price).toFixed(2)}
+										href={`/article/${article.slug}`}
+									/>
+								))}
+							</Box>
+						</>
+					)}
 				</Box>
 			</Container>
 		</main>
