@@ -18,13 +18,52 @@ import useGetSWR from "../lib/useGetSWR";
 import ErrorCard from "../components/errorcard";
 import Loader from "../components/loader";
 
-export default function Search() {
-	const [showFilters, setShowFilters] = useState(false);
-
+function SearchResults() {
 	const searchParams = useSearchParams();
 	const query = searchParams.get("query");
 
 	const { data, isLoading, error } = useGetSWR(`/api/articles?query=${query}`);
+
+	return (
+		<>
+			<Typography variant='h5' component='h2' sx={{ mb: 2 }}>
+				Search for : {query}
+			</Typography>
+			{isLoading ? (
+				<Loader />
+			) : error ? (
+				<ErrorCard />
+			) : (
+				<Box
+					sx={{
+						display: "grid",
+						gridTemplateColumns: {
+							xs: "repeat(2, 1fr)",
+							sm: "repeat(3, 1fr)",
+							md: "repeat(4, 1fr)",
+							lg: "repeat(6, 1fr)",
+						},
+						gap: 3,
+					}}
+				>
+					{data.articles.map((article: any) => (
+						<ArticleCard
+							key={article.id}
+							title={article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")}
+							imagePath={article.images[0]}
+							rating={article.rating}
+							priceCad={Number(article.price).toFixed(2)}
+							href={`/article/${article.slug}`}
+						/>
+					))}
+				</Box>
+			)}
+		</>
+	);
+}
+
+export default function Search() {
+	const [showFilters, setShowFilters] = useState(false);
 
 	return (
 		<main>
@@ -95,42 +134,7 @@ export default function Search() {
 					</Box>
 				</Box>
 				<Box sx={{ flex: 1 }}>
-					<Typography variant='h5' component='h2' sx={{ mb: 2 }}>
-						Search for : <Suspense>{query}</Suspense>
-					</Typography>
-					{isLoading ? (
-						<Loader />
-					) : error ? (
-						<ErrorCard />
-					) : (
-						<>
-							<Box
-								sx={{
-									display: "grid",
-									gridTemplateColumns: {
-										xs: "repeat(2, 1fr)",
-										sm: "repeat(3, 1fr)",
-										md: "repeat(4, 1fr)",
-										lg: "repeat(6, 1fr)",
-									},
-									gap: 3,
-								}}
-							>
-								{data.articles.map((article: any) => (
-									<ArticleCard
-										key={article.id}
-										title={
-											article.title.substring(0, 70) + (article.title.length > 70 ? "..." : "")
-										}
-										imagePath={article.images[0]}
-										rating={article.rating}
-										priceCad={Number(article.price).toFixed(2)}
-										href={`/article/${article.slug}`}
-									/>
-								))}
-							</Box>
-						</>
-					)}
+					<SearchResults />
 				</Box>
 			</Container>
 		</main>

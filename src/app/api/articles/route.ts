@@ -15,18 +15,10 @@ export const GET = tryCatch(async (request: NextRequest) => {
 	const categories = category ? category.split(",") : null;
 
 	const ANDConditions = [];
-	const ORConditions = [];
 
 	if (query) {
-		ORConditions.push({
+		ANDConditions.push({
 			title: {
-				contains: query,
-				mode: Prisma.QueryMode.insensitive,
-			},
-		});
-
-		ORConditions.push({
-			description: {
 				contains: query,
 				mode: Prisma.QueryMode.insensitive,
 			},
@@ -59,7 +51,6 @@ export const GET = tryCatch(async (request: NextRequest) => {
 	const articles = await prisma.article.findMany({
 		where: {
 			AND: ANDConditions,
-			OR: ORConditions,
 		},
 	});
 

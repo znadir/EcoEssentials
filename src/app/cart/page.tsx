@@ -83,7 +83,7 @@ export default function Cart() {
 				0
 			)
 		);
-	}, [cart]);
+	}, [cart, data?.articles]);
 
 	return isLoading ? (
 		<Loader />
