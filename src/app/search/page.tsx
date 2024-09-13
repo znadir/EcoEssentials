@@ -134,7 +134,9 @@ export default function Search() {
 					</Box>
 				</Box>
 				<Box sx={{ flex: 1 }}>
-					<SearchResults />
+					<Suspense>
+						<SearchResults />
+					</Suspense>
 				</Box>
 			</Container>
 		</main>
