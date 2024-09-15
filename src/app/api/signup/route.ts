@@ -28,7 +28,10 @@ export const POST = tryCatch(async (request: NextRequest) => {
 
 	// verify if password is strong enough
 	if (password.length < 8) {
-		return Response.json({ message: "Password too short" }, { status: 400 });
+		return Response.json(
+			{ message: "Password too short. Must be at least 8 characters." },
+			{ status: 400 }
+		);
 	}
 
 	// verify if email is already in use
