@@ -17,6 +17,7 @@ import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import { toast } from "react-toastify";
 import { setCookie } from "../utilsClient";
 import { useRouter } from "next/navigation";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export default function LoginSignup() {
 	const [isLoginDetected, setIsLoginDetected] = useState(false);
@@ -27,6 +28,8 @@ export default function LoginSignup() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [acceptTerms, setAcceptTerms] = useState(false);
+
+	const [captchaToken, setCaptchaToken] = useState("");
 
 	const router = useRouter();
 
@@ -61,6 +64,7 @@ export default function LoginSignup() {
 			body: JSON.stringify({
 				email,
 				password,
+				captchaToken,
 			}),
 		});
 
@@ -98,6 +102,7 @@ export default function LoginSignup() {
 				name: lastName,
 				password,
 				receiveEmails: true,
+				captchaToken,
 			}),
 		});
 
@@ -123,6 +128,7 @@ export default function LoginSignup() {
 		setPassword("");
 		setConfirmPassword("");
 		setAcceptTerms(false);
+		setCaptchaToken("");
 	};
 
 	return (
@@ -206,6 +212,11 @@ export default function LoginSignup() {
 								fullWidth
 							/>
 
+							<HCaptcha
+								sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
+								onVerify={setCaptchaToken}
+							/>
+
 							<Box sx={{ display: "flex", gap: 1, mt: 1 }}>
 								<Button
 									sx={{ width: "fit-content" }}
@@ -269,6 +280,11 @@ export default function LoginSignup() {
 									/>
 								}
 								label='Agree to the Terms and Conditions'
+							/>
+
+							<HCaptcha
+								sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
+								onVerify={setCaptchaToken}
 							/>
 
 							<Box sx={{ display: "flex", gap: 1, mt: 1 }}>

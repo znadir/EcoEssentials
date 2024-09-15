@@ -1,13 +1,23 @@
 import prisma from "@/app/lib/prisma";
 import { hashPassword, signJwt, tryCatch } from "@/app/utils";
 import { NextRequest } from "next/server";
+import { verifyHcaptchaToken } from "../utils";
 
 export const POST = tryCatch(async (request: NextRequest) => {
 	// get body params
-	const { name, firstName, email, password, receiveEmails } = await request.json();
+	const { name, firstName, email, password, receiveEmails, captchaToken } = await request.json();
 
 	if (!name || !firstName || !email || !password) {
 		return Response.json({ message: "Missing required fields" }, { status: 400 });
+	}
+
+	// verify hcaptcha token
+	if (process.env.NODE_ENV !== "test") {
+		const hcaptchaSuccess = await verifyHcaptchaToken(captchaToken);
+
+		if (!hcaptchaSuccess) {
+			return Response.json({ message: "Invalid captcha. Please try again" }, { status: 400 });
+		}
 	}
 
 	// verify name and firstName arent empty
