@@ -10,6 +10,11 @@ export const POST = tryCatch(async (request: NextRequest) => {
 		return Response.json({ message: "Missing required fields" }, { status: 400 });
 	}
 
+	// verify name and firstName arent empty
+	if (name.trim() === "" || firstName.trim() === "") {
+		return Response.json({ message: "Name and first name cannot be empty" }, { status: 400 });
+	}
+
 	// verify if email is valid
 	if (
 		!String(email)
