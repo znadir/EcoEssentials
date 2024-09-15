@@ -32,6 +32,10 @@ export default function LoginSignup() {
 
 	const checkEmailExists = async (e: any) => {
 		e.preventDefault();
+		if (email === "") {
+			return toast.error("Please enter an email address.");
+		}
+
 		const res = await fetch("/api/is-existing?email=" + email);
 
 		if (!res.ok) {
@@ -46,6 +50,32 @@ export default function LoginSignup() {
 		} else {
 			setIsLogin(false);
 			setIsLoginDetected(true);
+		}
+	};
+
+	const login = async (e: any) => {
+		e.preventDefault();
+
+		const res = await fetch("/api/login", {
+			method: "POST",
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		});
+
+		const data = await res.json();
+
+		if (res.status === 200) {
+			toast.success("Logged in successfully. Redirecting...");
+
+			const token = data.token;
+			setCookie("token", token, 365);
+
+			router.push("/");
+		} else {
+			const errorMsg = data.message || "An error occurred. Please try again later.";
+			toast.error(errorMsg);
 		}
 	};
 
@@ -161,9 +191,20 @@ export default function LoginSignup() {
 							</Button>
 						</Box>
 					) : isLogin ? (
-						<FormControl sx={{ display: "flex", gap: 1 }} fullWidth>
-							<TextField label='Email' fullWidth />
-							<TextField label='Password' fullWidth />
+						<FormControl
+							component='form'
+							onSubmit={login}
+							sx={{ display: "flex", gap: 1 }}
+							fullWidth
+						>
+							<TextField value={email} label='Email' fullWidth disabled />
+							<TextField
+								onChange={(e) => setPassword(e.target.value)}
+								value={password}
+								label='Password'
+								type='password'
+								fullWidth
+							/>
 
 							<Box sx={{ display: "flex", gap: 1, mt: 1 }}>
 								<Button

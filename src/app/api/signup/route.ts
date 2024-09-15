@@ -15,6 +15,14 @@ export const POST = tryCatch(async (request: NextRequest) => {
 		return Response.json({ message: "Name and first name cannot be empty" }, { status: 400 });
 	}
 
+	// verify values arent too long
+	if (name.length > 50 || firstName.length > 50 || email.length > 50) {
+		return Response.json(
+			{ message: "Name, First Name and Emails can't be longer than 50 characters" },
+			{ status: 400 }
+		);
+	}
+
 	// verify if email is valid
 	if (
 		!String(email)
