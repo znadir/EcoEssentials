@@ -73,7 +73,7 @@ export default function LoginSignup() {
 		const data = await res.json();
 
 		if (res.status === 200) {
-			toast.success("Logged in successfully. Redirecting...");
+			toast.success("Logged in successfully.");
 
 			const token = data.token;
 			setCookie("token", token, 365);
@@ -189,6 +189,7 @@ export default function LoginSignup() {
 								onChange={(e) => setEmail(e.target.value)}
 								type='email'
 								label='Email'
+								autoFocus
 							/>
 
 							<Button
@@ -214,6 +215,7 @@ export default function LoginSignup() {
 								label='Password'
 								type='password'
 								fullWidth
+								autoFocus
 							/>
 
 							<HCaptcha
@@ -254,6 +256,7 @@ export default function LoginSignup() {
 									value={firstName}
 									label='First Name'
 									fullWidth
+									autoFocus
 								/>
 								<TextField
 									onChange={(e) => setLastName(e.target.value)}
