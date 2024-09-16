@@ -16,7 +16,7 @@ export function getCookie(cname: string) {
 	return null;
 }
 
-export default function useGetSWR(url: any, isApiHost = true) {
+export default function useGetSWR(url: any, callback: ((data: any) => any) | null = null) {
 	const { data, error, isLoading } = useSWR(url, async (realUrl: string) => {
 		const token = getCookie("token");
 
@@ -32,6 +32,8 @@ export default function useGetSWR(url: any, isApiHost = true) {
 		}
 
 		const data = await response.json();
+
+		callback && callback(data);
 
 		return data;
 	});
