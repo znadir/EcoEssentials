@@ -63,5 +63,5 @@ it("should update info of the user", async () => {
 	const response = await PATCH(nextRequest);
 	const body = await response.json();
 
-	expect(body.user).toEqual({ ...user, ...updateRequest });
+	expect(body.user).toEqual({ ...user, ...updateRequest, passwordHash: undefined });
 });

@@ -58,8 +58,10 @@ export const PATCH = tryCatch(async (request: NextRequest) => {
 		},
 	});
 
+	const updatedUserWithoutPass = { ...updatedUser, passwordHash: undefined };
+
 	return Response.json({
 		message: "User updated",
-		user: updatedUser,
+		user: updatedUserWithoutPass,
 	});
 });

@@ -24,6 +24,32 @@ export default function Account() {
 	const router = useRouter();
 	const { mutate } = useSWRConfig();
 
+	const editAccount = async (e: any) => {
+		e.preventDefault();
+
+		const res = await fetch("/api/account", {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				firstName,
+				name: lastName,
+				email,
+				password,
+			}),
+		});
+
+		const data = await res.json();
+
+		if (!res.ok) {
+			const errorMsg = data?.message || "An error occurred. Please try again later.";
+			return toast.error(errorMsg);
+		}
+
+		toast.success("Account edited successfully");
+	};
+
 	return isLoading ? (
 		<Loader />
 	) : error ? (
@@ -36,9 +62,14 @@ export default function Account() {
 			}}
 		>
 			<Box sx={{ display: "flex", justifyContent: "center" }}>
-				<Card variant='outlined' sx={{ p: 3, width: "100%", maxWidth: "850px" }}>
+				<Card
+					onSubmit={editAccount}
+					component='form'
+					variant='outlined'
+					sx={{ p: 3, width: "100%", maxWidth: "850px" }}
+				>
 					<Typography variant='h6' sx={{ mb: 2 }}>
-						Account
+						Edit Account
 					</Typography>
 
 					<FormControl sx={{ display: "flex", gap: 1 }} fullWidth>
