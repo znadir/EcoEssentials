@@ -4,6 +4,10 @@ import useGetSWR from "../lib/useGetSWR";
 import ErrorCard from "../components/errorcard";
 import Loader from "../components/loader";
 import { useState } from "react";
+import { deleteCookie } from "../utilsClient";
+import { useRouter } from "next/navigation";
+import { useSWRConfig } from "swr";
+import { toast } from "react-toastify";
 
 export default function Account() {
 	const [firstName, setFirstName] = useState("");
@@ -16,6 +20,9 @@ export default function Account() {
 		setLastName(data.user.name);
 		setEmail(data.user.email);
 	});
+
+	const router = useRouter();
+	const { mutate } = useSWRConfig();
 
 	return isLoading ? (
 		<Loader />
@@ -64,14 +71,30 @@ export default function Account() {
 							fullWidth
 						/>
 
-						<Button
-							sx={{ mt: 1, width: "fit-content" }}
-							size='large'
-							type='submit'
-							variant='contained'
-						>
-							Edit Account
-						</Button>
+						<Box sx={{ display: "flex", gap: 1 }}>
+							<Button
+								sx={{ mt: 1, width: "fit-content" }}
+								size='large'
+								type='submit'
+								variant='contained'
+							>
+								Edit Account
+							</Button>
+							<Button
+								sx={{ mt: 1, width: "fit-content" }}
+								size='large'
+								variant='contained'
+								color='error'
+								onClick={() => {
+									deleteCookie("token");
+									mutate("/api/is-signed-in");
+									router.push("/");
+									toast.success("Logged out successfully");
+								}}
+							>
+								Logout
+							</Button>
+						</Box>
 					</FormControl>
 				</Card>
 			</Box>
