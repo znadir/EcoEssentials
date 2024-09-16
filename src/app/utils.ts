@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "./lib/prisma";
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import bcrypt from "bcrypt";
+import * as jose from "jose";
 
 export async function hashPassword(password: string) {
 	return await bcrypt.hash(password, 10);
@@ -27,11 +27,26 @@ export const tryCatch =
 	};
 
 export async function signJwt(payload: any) {
-	return await jwt.sign(payload, process.env.JWT_SECRET);
+	const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
+
+	const token = await new jose.SignJWT(payload)
+		.setProtectedHeader({ alg: "HS256" })
+		.setIssuedAt()
+		.setIssuer("issuer")
+		.setAudience("audience")
+		.sign(secretKey);
+	return token;
 }
 
 export async function verifyJwt(token: string) {
-	return await jwt.verify(token, process.env.JWT_SECRET);
+	const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
+
+	const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey, {
+		issuer: "issuer",
+		audience: "audience",
+	});
+
+	return payload;
 }
 
 export async function getUserId(req: NextRequest) {
@@ -46,7 +61,18 @@ export async function getUserId(req: NextRequest) {
 		return "test";
 	}
 
-	const jwt = await verifyJwt(authToken);
+	let jwt = null;
+
+	try {
+		jwt = (await verifyJwt(authToken)) as { id: string };
+	} catch (error) {
+		return null;
+	}
+
+	if (typeof jwt !== "object") {
+		return null;
+	}
+
 	const { id } = jwt;
 
 	const user = await prisma.user.findUnique({
