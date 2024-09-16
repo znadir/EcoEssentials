@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAppSelector } from "@/app/lib/hooks";
 import { selectCart } from "../lib/features/cartSlice";
+import useGetSWR from "@/app/lib/useGetSWR";
 
 export default function NavBar() {
 	const router = useRouter();
@@ -22,6 +23,10 @@ export default function NavBar() {
 	};
 
 	const cart = useAppSelector(selectCart);
+
+	const { data, error, isLoading } = useGetSWR("/api/is-signed-in");
+
+	const isLoggedIn = data?.userId;
 
 	return (
 		<>
@@ -41,9 +46,13 @@ export default function NavBar() {
 							</Link>
 
 							<Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-								<IconButton onClick={() => router.push("/login")}>
-									<AccountCircleIcon />
-								</IconButton>
+								{!isLoading && (
+									<IconButton
+										onClick={() => (isLoggedIn ? router.push("/account") : router.push("/login"))}
+									>
+										<AccountCircleIcon />
+									</IconButton>
+								)}
 								<IconButton onClick={() => router.push("/cart")}>
 									<ShoppingCartIcon />
 								</IconButton>
@@ -110,11 +119,26 @@ export default function NavBar() {
 						</Box>
 
 						<Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-							<Link href='/login'>
-								<Button variant='contained' size='medium' startIcon={<AccountCircleIcon />}>
-									Login/Sign Up
-								</Button>
-							</Link>
+							{isLoggedIn ? (
+								<Link href='/account'>
+									<Button
+										color='info'
+										variant='contained'
+										size='medium'
+										startIcon={<AccountCircleIcon />}
+									>
+										Account
+									</Button>
+								</Link>
+							) : (
+								!isLoading && (
+									<Link href='/login'>
+										<Button variant='contained' size='medium' startIcon={<AccountCircleIcon />}>
+											Login/Sign Up
+										</Button>
+									</Link>
+								)
+							)}
 
 							<Badge badgeContent={cart.qty} color='primary'>
 								<Link href='/cart'>

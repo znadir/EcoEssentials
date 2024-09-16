@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { setCookie } from "../utilsClient";
 import { useRouter } from "next/navigation";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useSWRConfig } from "swr";
 
 export default function LoginSignup() {
 	const [isLoginDetected, setIsLoginDetected] = useState(false);
@@ -32,6 +33,7 @@ export default function LoginSignup() {
 	const [captchaToken, setCaptchaToken] = useState("");
 
 	const router = useRouter();
+	const { mutate } = useSWRConfig();
 
 	const checkEmailExists = async (e: any) => {
 		e.preventDefault();
@@ -75,6 +77,7 @@ export default function LoginSignup() {
 
 			const token = data.token;
 			setCookie("token", token, 365);
+			mutate("/api/is-signed-in");
 
 			router.push("/");
 		} else {
@@ -113,6 +116,7 @@ export default function LoginSignup() {
 
 			const token = data.token;
 			setCookie("token", token, 365);
+			mutate("/api/is-signed-in");
 
 			router.push("/");
 		} else {
