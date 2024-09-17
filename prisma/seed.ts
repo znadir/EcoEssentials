@@ -160,6 +160,180 @@ async function main() {
 			images: ["/articles/swedish-paper.jpg"],
 			categories: ["new", "eco-home"],
 		},
+		{
+			slug: "simply-bambu-bamboo",
+			title:
+				"Simply Bambu Bamboo Toilet Paper- 24 Rolls of Eco Friendly Toilet Paper, 2 Ply - 300 Sheets Hypoallergenic, Tree Free, Plastic Free, 100% Organic, Septic Safe, 2 Ply Sheets, Chlorine Free",
+			description:
+				"- BAMBOO PAPER, made of bamboo pulp, which has been shown to be less resource intensive than making paper out of trees. The GRASS that produce the pulp are also naturally regenerative.\n\n- SEPTIC SAFE, bamboo toilet paper is designed to be softer than other toilet paper on the market while also dissolving 8 times faster. So you can feel good about wiping.\n\n- ECO FRIENDLY, 270,000 trees are cut down for toilet paper, flushed down the world's toilets each day or dumped in landfills, our alternative paper SAVES TREES! ",
+			price: 35.88,
+			images: ["/articles/bombu-paper.jpg"],
+			categories: ["new", "eco-home", "personal-care"],
+			reviews: {
+				create: [
+					{
+						username: "Andrew Doe",
+						stars: 3,
+						comment: "I like bamboo toilet paper. It is very soft and it cleans my skin very well.",
+					},
+					{
+						username: "Bianca Doe",
+						stars: 4,
+						comment:
+							"I think it's a good product. It is eco-friendly and it is very soft. I will buy it again.",
+					},
+					{
+						username: "Alice Doe",
+						stars: 5,
+						comment: "I love this toilet paper. Better than the regular one.",
+					},
+					{
+						username: "Eva Doe",
+						stars: 5,
+						comment: "Not bad. I like it. Would recommend it to my friends.",
+					},
+				],
+			},
+		},
+		{
+			slug: "eco-dental-floss",
+			title:
+				"Eco-Friendly Dental Floss Pick, Biodegradable & Compostable, Bamboo Charcoal Flosser, 200 Sticks By Y-Kelin",
+			description:
+				"- 2-IN-1 FUNCTION - Bamboo Charcoal Dental Floss can remove excess residue, remove plaque that the toothbrush cannot reach, and keep teeth clean. It can also be used as a toothpick.The middle part adopts a convex design to enhance the hand feeling and save effort.\n\n- ECO FRIENDLY - Y-Kelin floss picks are made mainly from Charcoal & CORN-STARCH and packaged in craft paper packaging\n\n- MINT FLAVORED - The mint-flavored feature will give you that final extra fresh sensation and ultimate eco flossing experience! ",
+			price: 13.36,
+			images: ["/articles/dental-floss.jpg"],
+			categories: ["new", "eco-home", "personal-care"],
+			reviews: {
+				create: [
+					{
+						username: "Fiona Doe",
+						stars: 5,
+						comment: "I love this product! It is amazing. I will definitely buy it again!",
+					},
+					{
+						username: "Gina Doe",
+						stars: 4,
+						comment: "I like this dental floss. It is very soft and it cleans my teeth very well.",
+					},
+					{
+						username: "Hannah Doe",
+						stars: 3,
+						comment: "I think it's a good product. It is eco-friendly and it is very soft.",
+					},
+					{
+						username: "Ivy Doe",
+						stars: 2,
+						comment: "Not bad. I like it. Would recommend it to my friends.",
+					},
+				],
+			},
+		},
+		{
+			slug: "natural-ukeenor",
+			title:
+				"UKEENOR Natural Bamboo Sponges Kitchen Cleaning Sponges Dish Sponges Reusable Dish Washing Sponges Super Absorbent Eco Friendly 6 Pack",
+			description:
+				"- Size: 3.8 inches x 5.1 inches Per, 6 Packs are great and durable for all kinds of kitchen cleaning task.\n\n- This sponge is designed to clean better and be longer lasting than traditional sponges. Made of bamboo fiber material for higher cleaning power. Super durable and long lasting to make your life easier.\n\n- You'll be amazed at the amount of sudsy water than this sponge absorbs. Bamboo is the premier material when it comes to home cleaning. You'll never go back to other sponge ",
+			price: 16.88,
+			images: ["/articles/kitchen-sponges-bamboo.jpg"],
+			categories: ["new", "eco-home", "personal-care"],
+			reviews: {
+				create: [
+					{
+						username: "John Doe",
+						stars: 5,
+						comment: "I love this product! It is amazing. I will definitely buy it again!",
+					},
+					{
+						username: "Jane Doe",
+						stars: 4,
+						comment: "I like this sponge. It is very soft and it cleans my dishes very well.",
+					},
+					{
+						username: "Alice Doe",
+						stars: 3,
+						comment: "I think it's a good product. It is eco-friendly and it is very soft.",
+					},
+					{
+						username: "Bob Doe",
+						stars: 2,
+						comment: "Not bad. I like it. Would recommend it to my friends.",
+					},
+				],
+			},
+		},
+		{
+			slug: "adult-toothbrushes",
+			title:
+				"Adult Bamboo Toothbrush, Soft Bristle Toothbrush, Eco Friendly & Natural, BPA Free, Wooden Toothbrushes, Zero Waste Products, Organic, Vegan, Tooth Brush, Non Plastic, Environmental (Multi-color 8 PACK)",
+			description:
+				"- 🌍 OUR PLANET MATTERS - minimize plastic waste and brush with confidence! Bamboo is naturally abundant and a great substitute for normal plastic toothbrush. Our Natural Toothbrushes are sure to satisfy your brushing needs, even down to the packaging made with recycled paper!\n\n- 👨‍👩‍👧‍👦 PACK OF 8 - Perfect to serve your family and your guests.. OR pack them away for your travels, its a win win win! Individual travel packs for your convenience\n\n- ✔️ SOFT UNIQUE BRISTLES + 🐼BAMBOO = 💪..Did you know that bamboo has a higher tensile strength than steel? That combined with the unique shape and softness of our bristles allow you to get the oral care you deserve. And yes, our bristles are BPA FREE! ",
+			price: 11,
+			images: ["/articles/adult-toothbrushes.jpg"],
+			categories: ["new", "eco-home", "personal-care"],
+			reviews: {
+				create: [
+					{
+						username: "Martin Doe",
+						stars: 5,
+						comment: "Those toothbrushes are amazing. I love them. I will buy them again.",
+					},
+					{
+						username: "Natalie Doe",
+						stars: 4,
+						comment: "Really good toothbrushes. Why didn't I buy them before?",
+					},
+					{
+						username: "Olivia Doe",
+						stars: 3,
+						comment: "I think they are good for the price. I don't know if I will buy them again.",
+					},
+					{
+						username: "Peter Doe",
+						stars: 2,
+						comment: "Not bad. I like them. Would recommend them to my friends.",
+					},
+				],
+			},
+		},
+		{
+			slug: "zero-waste-soap",
+			title:
+				"Zero Waste Natural Dish Soap Bar (Pack of 3 Bars) - Solid Vegan Dishwashing Block - Cold Processed, Eco Friendly Plastic Free Packaging with Sustainable Organic Ingredients for Kitchen Camping",
+			description: "Eco Friendly",
+			price: 1,
+			images: ["/articles/zero-waste-soap.jpg"],
+			categories: ["new", "eco-home", "zero-waste"],
+			reviews: {
+				create: [
+					{
+						username: "Bob Doe",
+						stars: 1,
+						comment: "It smells bad. Very bad. Smells like rotten eggs. Do not buy it.",
+					},
+				],
+			},
+		},
+		{
+			slug: "mirror-cleaner",
+			title:
+				"ATTITUDE Window and Mirror Cleaner, EWG Verified, Plant- and Mineral-Based Ingredients, Vegan and Cruelty-free Household Products, Citrus Zest, 800 mL",
+			description:
+				"EWG VERIFIED: Clean ingredients and full transparency\n\nNATURAL ORIGIN: Made with ≥ 94 % naturally sourced ingredients\n\nINGREDIENTS: Contains powerful naturally sourced ingredients with cleaning properties\n\nEASY RECYCLABLE PACKAGING: Bottle made from easily recyclable HDPE #2 plastic ",
+			price: 4.56,
+			images: ["/articles/mirror-cleaner.jpg"],
+			categories: ["new", "eco-home", "zero-waste"],
+			reviews: {
+				create: [
+					{
+						username: "Bob Doe",
+						stars: 4,
+						comment: "Works well. I like it. Would recommend it to my friends.",
+					},
+				],
+			},
+		},
 	];
 
 	for (const article of articles) {

@@ -7,7 +7,7 @@ import { getReviewsAvg } from "@/app/api/utils";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-	const articlesWithoutReviews = await prisma.article.findMany({ take: 10 });
+	const articlesWithoutReviews = await prisma.article.findMany({ take: 12 });
 	const articles = await Promise.all(
 		articlesWithoutReviews.map(async (article) => {
 			const rating = await getReviewsAvg(article.id);

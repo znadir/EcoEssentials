@@ -86,9 +86,6 @@ export default function Article({ params }: { params: { slug: string } }) {
 				>
 					<Card sx={{ flex: 2, height: "100%" }}>
 						<CardMedia component='img' image={data.article.images[0]} alt='' />
-						<Box sx={{ display: "flex" }}>
-							<Image src={data.article.images[0]} alt='' width={80} height={80} />
-						</Box>
 					</Card>
 					<Box sx={{ flex: 5 }}>
 						<Typography component='h1' variant='h5' sx={{ mb: 1 }}>

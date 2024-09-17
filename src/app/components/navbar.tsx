@@ -120,12 +120,7 @@ export default function NavBar() {
 					<Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
 						{isLoggedIn ? (
 							<Link href='/account'>
-								<Button
-									color='info'
-									variant='contained'
-									size='medium'
-									startIcon={<AccountCircleIcon />}
-								>
+								<Button variant='contained' size='medium' startIcon={<AccountCircleIcon />}>
 									Account
 								</Button>
 							</Link>
